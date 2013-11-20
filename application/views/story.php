@@ -9,13 +9,12 @@
 <body>
 
 <div id="container">
-  <h1><?php echo $browse_data['story_data']['story']['title']; ?></h1>
-
   <div class="story-frame">
-  
+    <h1><?php echo $browse_data['story_data']['story']['title']; ?></h1>
+
     <div class="current">
     <img src="<?php echo base_url('images/story/'.$browse_data['story_data']['story']['image_id']); ?>">
-    <p>"<?php echo $browse_data['story_data']['story']['description']; ?>"</p>
+    <p><?php echo $browse_data['story_data']['story']['description']; ?></p>
     </div>
 
     <div class="parent">

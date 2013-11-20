@@ -58,8 +58,10 @@ select, textarea, input {
   position: relative;
   float: left;
   left: 200px;
+  width: 600px;
 }
 .story-frame .current img {
   max-width: 600px;
   max-height: 600px;
+  margin-bottom: 20px;
 }
