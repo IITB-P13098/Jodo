@@ -1,0 +1,26 @@
+html, body { height: 100%; }
+
+body {
+  font-family: 'Open Sans', Sans-Serif;
+  font-weight: 300;
+  font-style: normal;
+  line-height: 1.58;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  color: #35424A;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: 'Lato', Sans-Serif; font-weight: 300; }
+
+.container { max-width: none !important; width: 970px; }
+
+.thumb {
+  display: inline-block;
+  background-color: #F0EAED;
+  width: 200px;
+  height: 200px;
+  background-position: center center;
+  background-size: cover;
+}
+
+.text-wrap { word-wrap: break-word; }
