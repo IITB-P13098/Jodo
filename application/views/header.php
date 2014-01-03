@@ -1,3 +1,5 @@
+<?php $rime_oauth_url = 'http://rimebeta.com/api/oauth/authenticate/jodo'; ?>
+
 <header>
   <nav class="navbar navbar-default" role="navigation">
     <div class="container">
@@ -23,7 +25,7 @@
           <button type="submit" class="btn btn-default sr-only">Submit</button>
         </form>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Sign in with Rime</a></li>
+          <li><a href="<?php echo $rime_oauth_url; ?>">Sign in with Rime</a></li>
         </ul>
       </div>
     </div>
