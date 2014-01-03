@@ -26,6 +26,8 @@ CREATE TABLE IF NOT EXISTS ci_sessions (
 
 CREATE TABLE IF NOT EXISTS users (
   user_id           bigint unsigned                     NOT NULL,
+  username          varchar(50)       COLLATE utf8_bin  NOT NULL,
+  last_ip           varchar(40)       COLLATE utf8_bin  NOT NULL,
   last_login        datetime                            NOT NULL DEFAULT '0000-00-00 00:00:00',
   created           timestamp                           NOT NULL DEFAULT '0000-00-00 00:00:00',
   modified          timestamp         NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -54,13 +56,13 @@ CREATE TABLE IF NOT EXISTS user_autologin (
 -- Table structure for table services_cache
 --
 
-CREATE TABLE IF NOT EXISTS users_cache (
-  cache_id          bigint unsigned                     NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS user_profiles (
   user_id           bigint unsigned                     NOT NULL,
-  response          mediumtext        COLLATE utf8_bin  NOT NULL,
-  created           timestamp                           NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (cache_id),
-  INDEX(user_id),
+  disp_name         varchar(32)       COLLATE utf8_bin  NOT NULL,
+  bio               text              COLLATE utf8_bin  DEFAULT NULL,
+  profile_image_id  bigint unsigned                     DEFAULT NULL,
+  cover_image_id    bigint unsigned                     DEFAULT NULL,
+  PRIMARY KEY (user_id),
   FOREIGN KEY (user_id) REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -72,10 +74,12 @@ CREATE TABLE IF NOT EXISTS users_cache (
 
 CREATE TABLE IF NOT EXISTS story (
   story_id          bigint unsigned                     NOT NULL AUTO_INCREMENT,
+  user_id           bigint unsigned                     NOT NULL,
   title             varchar(128)      COLLATE utf8_bin  NOT NULL UNIQUE,
   created           timestamp                           NOT NULL DEFAULT '0000-00-00 00:00:00',
   modified          timestamp         NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (story_id)
+  PRIMARY KEY (story_id),
+  FOREIGN KEY (user_id) REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
