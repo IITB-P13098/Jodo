@@ -10,7 +10,7 @@ body {
   color: #35424A;
 }
 
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: 'Lato', Sans-Serif; font-weight: 300; }
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: 'Lato', Sans-Serif; font-weight: 700; }
 
 .container { max-width: none !important; width: 970px; }
 

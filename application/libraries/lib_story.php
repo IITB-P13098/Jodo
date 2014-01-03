@@ -65,6 +65,9 @@ class Lib_story
 
     $data['child_list'] = $this->ci->model_page->get_child_list($page_id);
 
+    $this->ci->load->library('lib_user_profile');
+    $data['user'] = $this->ci->lib_user_profile->get_user_profile_by_id($story['user_id']);
+
     return $data;
   }
 }

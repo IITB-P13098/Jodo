@@ -176,7 +176,7 @@ class Tank_auth
 
       $this->ci->db->trans_start();
       $this->ci->users->update_user($user_id, $profile_data['username']);
-      $this->ci->model_profile->update_profile($user_id, $profile_data['disp_name'], $profile_data['bio'], $profile_data['profile_image_id'], $profile_data['cover_image_id']);
+      $this->ci->model_profile->update_profile($user_id, $profile_data['disp_name'], $profile_data['bio_text_data']['html_text'], $profile_data['profile_image_id'], $profile_data['cover_image_id']);
       $this->ci->db->trans_complete();
     }
 

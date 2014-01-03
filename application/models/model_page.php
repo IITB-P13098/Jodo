@@ -4,6 +4,7 @@ class Model_page extends CI_Model
 {
   private $page_table     = 'page';
   private $story_table    = 'story';
+  private $images_table   = 'images';
   
   function create($user_id, $caption, $image_id, $story_id, $parent_page_id = NULL)
   {
@@ -22,10 +23,12 @@ class Model_page extends CI_Model
     $this->db->select($this->page_table.'.*');
     $this->db->select($this->story_table.'.story_id');
     $this->db->select($this->story_table.'.title');
-    $this->db->select($this->story_table.'.created');
+    //$this->db->select($this->story_table.'.created');
+    $this->db->select($this->images_table.'.file_name');
     
     $this->db->from($this->page_table);
     $this->db->join($this->story_table, $this->page_table.'.story_id = '.$this->story_table.'.story_id');
+    $this->db->join($this->images_table, $this->page_table.'.image_id = '.$this->images_table.'.image_id');
     
     $this->db->where('page_id', $page_id);
     
