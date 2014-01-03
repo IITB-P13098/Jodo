@@ -38,9 +38,15 @@ class Model_page extends CI_Model
   
   public function get_data_by_id($page_id)
   {
+    $this->db->select($this->page_table.'.*');
+    $this->db->select($this->images_table.'.file_name');
+    
+    $this->db->from($this->page_table);
+    $this->db->join($this->images_table, $this->page_table.'.image_id = '.$this->images_table.'.image_id');
+    
     $this->db->where('page_id', $page_id);
     
-    $query = $this->db->get($this->page_table);
+    $query = $this->db->get();
     return $query->row_array();
   }
   

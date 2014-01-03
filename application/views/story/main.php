@@ -3,12 +3,54 @@
 <div class="col-xs-12">
 
   <div class="row">
-    <div class="col-xs-2"></div>
+    <div class="col-xs-2">
+      <?php
+      if (!empty($story_data['parent_page']))
+      {
+        ?>
+        <a href="<?php echo base_url('story/index/'.$story_data['parent_page']['page_id']); ?>">
+          <div class="thumbanil">
+            <div class="thumb rect-responsive" style="background-image: url('<?php echo base_url('uploads/'.$story_data['parent_page']['file_name']); ?>');"></div>
+          </div>
+        </a>
+        <?php
+      }
+      ?>
+    </div>
     <div class="col-xs-7">
       <img class="img-responsive" src="<?php echo base_url('uploads/'.$story_data['story']['file_name']); ?>">
     </div>
-    <div class="col-xs-2"></div>
-    <div class="col-xs-1"></div>
+    <div class="col-xs-3">
+      <div class="row">
+        <?php
+        foreach ($story_data['child_list'] as $c)
+        {
+          break;
+          ?>
+          <div class="child">
+            <a href="<?php echo base_url('story/index/'.$c['page_id']); ?>">
+              <img src="<?php echo base_url('images/story/'.$c['image_id']); ?>">
+            </a>
+          </div>
+          <?php
+        }
+        ?>
+      </div>
+      <?php
+      if ($is_logged_in)
+      {
+        ?>
+        <div class="row">
+          <div class="col-xs-8">
+            <a href="<?php echo base_url('story/add/'.$story_data['story']['page_id']); ?>">
+              <img class="img-responsive" src="http://placehold.it/350x350">
+            </a>
+          </div>
+        </div>
+        <?php
+      }
+      ?>
+    </div>
   </div>
 
   <div class="row">
@@ -30,57 +72,3 @@
   </div>
   
 </div>
-
-<!--
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>css/style.css"/>
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
-  <title>JODO - <?php echo $browse_data['story_data']['story']['title']; ?></title>
-</head>
-<body>
-
-<div id="container">
-  <div class="story-frame">
-    <h1><?php echo $browse_data['story_data']['story']['title']; ?></h1>
-
-    <div class="current">
-    <img src="<?php echo base_url('images/story/'.$browse_data['story_data']['story']['image_id']); ?>">
-    <p><?php echo $browse_data['story_data']['story']['description']; ?></p>
-    </div>
-
-    <div class="parent">
-    <?php
-    if (!empty($browse_data['story_data']['parent_page']))
-    {
-      ?>
-      <a href="<?php echo base_url('story/index/'.$browse_data['story_data']['parent_page']['page_id']); ?>">
-      <img src="<?php echo base_url('images/story/'.$browse_data['story_data']['parent_page']['image_id']); ?>">
-      </a>
-      <?php
-    }
-    ?>
-    </div>
-
-    <div class="child-list">
-    <?php
-    foreach ($browse_data['story_data']['child_list'] as $c)
-    {
-      ?>
-      <div class="child">
-      <a href="<?php echo base_url('story/index/'.$c['page_id']); ?>">
-      <img src="<?php echo base_url('images/story/'.$c['image_id']); ?>">
-      </a>
-      </div>
-      <?php
-    }
-    ?>
-    </div>
-  </div>
-</div>
-
-</body>
-</html>
-!-->
