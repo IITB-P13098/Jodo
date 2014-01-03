@@ -22,6 +22,30 @@ class Lib_story
   {
     return $this->error;
   }
+
+  function create($user_id, $title, $image_data, $caption = '')
+  {
+    $this->ci->load->helper(array('text'));
+    
+    $title = htmlspecialchars($title);
+    $title = ascii_to_entities($title);
+    
+    $caption = htmlspecialchars($caption);
+    $caption = ascii_to_entities($caption);
+
+    $this->ci->db->trans_start();
+    $this->ci->load->model('model_image');
+    $image_id = $this->ci->model_image->create($user_id, $image_data);
+
+    $this->ci->load->model('model_story');
+    $story_id = $this->ci->model_story->create($user_id, $title);
+
+    $this->ci->load->model('model_page');
+    $page_id = $this->ci->model_page->create($user_id, $caption, $image_id, $story_id);
+    $this->ci->db->trans_complete();
+
+    return $page_id;
+  }
   
   public function get_data($page_id)
   {

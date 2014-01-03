@@ -66,6 +66,28 @@ CREATE TABLE IF NOT EXISTS user_profiles (
   FOREIGN KEY (user_id) REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for image
+--
+
+CREATE TABLE IF NOT EXISTS images (
+  image_id          bigint unsigned                     NOT NULL AUTO_INCREMENT,
+  user_id           bigint unsigned                     NOT NULL DEFAULT '0',
+  file_name         varchar(1024)     COLLATE utf8_bin  NOT NULL,
+  raw_name          varchar(1024)     COLLATE utf8_bin  NOT NULL,
+  orig_name         varchar(1024)     COLLATE utf8_bin  NOT NULL,
+  file_size         int unsigned                        NOT NULL,
+  image_width       int unsigned                        NOT NULL,
+  image_height      int unsigned                        NOT NULL,
+  image_type        varchar(64)       COLLATE utf8_bin  NOT NULL,
+  created           timestamp                           NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (image_id),
+  FOREIGN KEY (user_id) REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
 -- --------------------------------------------------------
 
 --
@@ -75,9 +97,8 @@ CREATE TABLE IF NOT EXISTS user_profiles (
 CREATE TABLE IF NOT EXISTS story (
   story_id          bigint unsigned                     NOT NULL AUTO_INCREMENT,
   user_id           bigint unsigned                     NOT NULL,
-  title             varchar(128)      COLLATE utf8_bin  NOT NULL UNIQUE,
-  created           timestamp                           NOT NULL DEFAULT '0000-00-00 00:00:00',
-  modified          timestamp         NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  title             varchar(1024)     COLLATE utf8_bin  NOT NULL,
+  created           timestamp                           NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (story_id),
   FOREIGN KEY (user_id) REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -91,13 +112,14 @@ CREATE TABLE IF NOT EXISTS story (
 CREATE TABLE IF NOT EXISTS page (
   page_id           bigint unsigned                     NOT NULL AUTO_INCREMENT,
   user_id           bigint unsigned                     NOT NULL DEFAULT '0',
-  description       varchar(1024)     COLLATE utf8_bin  NOT NULL,
-  image_id          varchar(1024)     COLLATE utf8_bin  NOT NULL,
+  caption           varchar(1024)     COLLATE utf8_bin  DEFAULT NULL,
+  image_id          bigint unsigned                     NOT NULL,
   parent_page_id    bigint unsigned                     DEFAULT NULL,
   story_id          bigint unsigned                     NOT NULL,
   created           timestamp                           NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (page_id),
   FOREIGN KEY (user_id) REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (image_id) REFERENCES images(image_id) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (parent_page_id) REFERENCES page(page_id) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (story_id) REFERENCES story(story_id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;

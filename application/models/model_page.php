@@ -5,6 +5,18 @@ class Model_page extends CI_Model
   private $page_table     = 'page';
   private $story_table    = 'story';
   
+  function create($user_id, $caption, $image_id, $story_id, $parent_page_id = NULL)
+  {
+    $this->db->set('user_id', $user_id);
+    $this->db->set('caption', $caption);
+    $this->db->set('image_id', $image_id);
+    $this->db->set('story_id', $story_id);
+    $this->db->set('parent_page_id', $parent_page_id);
+
+    $this->db->insert($this->page_table);
+    return $this->db->insert_id();
+  }
+
   public function get_story_data_by_id($page_id)
   {
     $this->db->select($this->page_table.'.*');

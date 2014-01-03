@@ -31,7 +31,7 @@ class Auth extends CI_Controller
       {
         if ($this->tank_auth->login($profile_data))
         {
-          redirect('');
+          redirect();
         }
         else
         {
