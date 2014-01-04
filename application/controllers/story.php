@@ -75,7 +75,7 @@ class Story extends CI_Controller
         if ($file_data['is_image'])
         {
           $this->load->library('lib_story');
-          $story_id = $this->lib_story->add_page($user_id, $story_data['story']['story_id'], !empty($story_data['story']['start_story_id']) ? $story_data['story']['start_story_id'] : $story_data['story']['story_id'], $file_data, $this->form_validation->set_value('caption'));
+          $story_id = $this->lib_story->add($user_id, $story_data['story']['story_id'], !empty($story_data['story']['start_story_id']) ? $story_data['story']['start_story_id'] : $story_data['story']['story_id'], $file_data, $this->form_validation->set_value('caption'));
 
           redirect('story/index/'.$story_id);
         }

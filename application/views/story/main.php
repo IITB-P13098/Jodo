@@ -5,12 +5,12 @@
   <div class="row">
     <div class="col-xs-2">
       <?php
-      if (!empty($story_data['parent_page']))
+      if (!empty($story_data['parent_story']))
       {
         ?>
-        <a href="<?php echo base_url('story/index/'.$story_data['parent_page']['story_id']); ?>">
+        <a href="<?php echo base_url('story/index/'.$story_data['parent_story']['story_id']); ?>">
           <div class="thumbnail">
-            <div class="thumb rect-responsive" style="background-image: url('<?php echo base_url('uploads/'.$story_data['parent_page']['file_name']); ?>');"></div>
+            <div class="thumb rect-responsive" style="background-image: url('<?php echo base_url('uploads/'.$story_data['parent_story']['file_name']); ?>');"></div>
           </div>
         </a>
         <?php
