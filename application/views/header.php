@@ -12,12 +12,20 @@
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <!--
+        
         <ul class="nav navbar-nav">
-          <li><a href="#">Link A</a></li>
-          <li><a href="#">Link B</a></li>
+          <li><a href="#">Popular</a></li>
+          <li><a href="#">Recent</a></li>
+          <?php
+          if ($is_logged_in)
+          {
+            ?>
+            <li><a href="<?php echo base_url('home/profile/'.$user_data['username']); ?>">Me</a></li>
+            <?php
+          }
+          ?>
         </ul>
-        !-->
+        
         <form class="navbar-form navbar-right" role="search">
           <div class="form-group">
             <input type="text" class="form-control" placeholder="Search">

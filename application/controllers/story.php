@@ -2,7 +2,7 @@
 
 class Story extends CI_Controller 
 {
-  public function index($page_id = 0)
+  public function index($page_id = 0, $index = 0)
   {
     $data = array();
 

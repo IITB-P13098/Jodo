@@ -59,7 +59,7 @@
         <div class="row">
           <div class="col-xs-8">
             <a href="<?php echo base_url('story/add/'.$story_data['story']['page_id']); ?>">
-              <img class="img-responsive" src="http://placehold.it/350x350">
+              <img class="img-responsive" src="http://placehold.it/350&text=Add+Page">
             </a>
           </div>
         </div>
