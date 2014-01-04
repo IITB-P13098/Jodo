@@ -14,7 +14,16 @@ class Model_story extends CI_Model
     $this->db->set('start_story_id', $start_story_id);
 
     $this->db->insert($this->story_table);
-    return $this->db->insert_id();
+    $story_id = $this->db->insert_id();
+
+    if ($parent_story_id == NULL)
+    {
+      $this->db->set('start_story_id', $story_id);
+      $this->db->where('story_id', $story_id);
+      $this->db->update($this->story_table);
+    }
+
+    return $story_id;
   }
 
   public function get_story_data_by_id($story_id)
@@ -24,7 +33,7 @@ class Model_story extends CI_Model
     $this->db->select($this->images_table.'.file_name');
     
     $this->db->from($this->story_table);
-    $this->db->join($this->story_title_table, $this->story_title_table.'.story_id = IF('.$this->story_table.'.start_story_id IS NULL, '.$this->story_table.'.story_id, '.$this->story_table.'.start_story_id)');
+    $this->db->join($this->story_title_table, $this->story_table.'.start_story_id = '.$this->story_title_table.'.story_id');
     $this->db->join($this->images_table, $this->story_table.'.story_id = '.$this->images_table.'.story_id');
     
     $this->db->where($this->story_table.'.story_id', $story_id);
@@ -45,6 +54,12 @@ class Model_story extends CI_Model
     
     $query = $this->db->get();
     return $query->row_array();
+  }
+
+  public function purge_by_id($story_id)
+  {
+    $this->db->where('story_id', $story_id);
+    $this->db->delete($this->story_table);
   }
   
   public function get_child_list($story_id, $per_page = 3, $page_id = 0)
@@ -84,7 +99,7 @@ class Model_story extends CI_Model
     $this->db->select($this->images_table.'.file_name');
     
     $this->db->from($this->story_table);
-    $this->db->join($this->story_title_table, $this->story_title_table.'.story_id = IF('.$this->story_table.'.start_story_id IS NULL, '.$this->story_table.'.story_id, '.$this->story_table.'.start_story_id)');
+    $this->db->join($this->story_title_table, $this->story_table.'.start_story_id = '.$this->story_title_table.'.story_id');
     $this->db->join($this->images_table, $this->story_table.'.story_id = '.$this->images_table.'.story_id');
     
     $this->db->where($this->story_table.'.user_id', $user_id);

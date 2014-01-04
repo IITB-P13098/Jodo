@@ -34,6 +34,8 @@ if (!empty($error[$caption['name']])) $caption['id'] = 'inputError';
 ?>
 
 <div class="col-xs-8 col-xs-offset-2">
+<h1>New Story</h1>
+
 <?php echo form_open_multipart($this->uri->uri_string()); ?>
 
 <div class="form-group <?php if (!empty($error[$title['name']])) echo 'has-error'; ?>">

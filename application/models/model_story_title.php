@@ -30,10 +30,10 @@ class Model_story_title extends CI_Model
     $this->db->select($this->images_table.'.file_name');
     
     $this->db->from($this->story_table);
-    $this->db->join($this->story_title_table, $this->story_title_table.'.story_id = '.$this->story_table.'.story_id');
+    $this->db->join($this->story_title_table, $this->story_table.'.start_story_id = '.$this->story_title_table.'.story_id');
     $this->db->join($this->images_table, $this->story_table.'.story_id = '.$this->images_table.'.story_id');
     
-    //$this->db->where('parent_story_id', NULL);
+    $this->db->where('parent_story_id', NULL);
     
     $query = $this->db->get();
     return $query->result_array();
