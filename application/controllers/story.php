@@ -2,7 +2,7 @@
 
 class Story extends CI_Controller 
 {
-  public function index($page_id = 0, $index = 0)
+  public function index($story_id = 0, $index = 0)
   {
     $data = array();
 
@@ -18,7 +18,7 @@ class Story extends CI_Controller
 
     $this->load->library('lib_story');
 
-    if (is_null($story_data = $this->lib_story->get_data($page_id)))
+    if (is_null($story_data = $this->lib_story->get_data($story_id)))
     {
       show_error($this->lib_story->get_error_message());
     }
@@ -31,7 +31,7 @@ class Story extends CI_Controller
     $this->load->view('base', $data);
   }
 
-  public function add($page_id = 0)
+  public function add($story_id = 0)
   {
     $data = array();
 
@@ -51,7 +51,7 @@ class Story extends CI_Controller
 
     $this->load->library('lib_story');
 
-    if (is_null($story_data = $this->lib_story->get_data($page_id)))
+    if (is_null($story_data = $this->lib_story->get_data($story_id)))
     {
       show_error($this->lib_story->get_error_message());
     }
@@ -75,9 +75,9 @@ class Story extends CI_Controller
         if ($file_data['is_image'])
         {
           $this->load->library('lib_story');
-          $page_id = $this->lib_story->add_page($user_id, $story_data['story']['story_id'], $story_data['story']['page_id'], $file_data, $this->form_validation->set_value('caption'));
+          $story_id = $this->lib_story->add_page($user_id, $story_data['story']['story_id'], !empty($story_data['story']['start_story_id']) ? $story_data['story']['start_story_id'] : $story_data['story']['story_id'], $file_data, $this->form_validation->set_value('caption'));
 
-          redirect('story/index/'.$page_id);
+          redirect('story/index/'.$story_id);
         }
         else
         {
@@ -139,9 +139,9 @@ class Story extends CI_Controller
         if ($file_data['is_image'])
         {
           $this->load->library('lib_story');
-          $page_id = $this->lib_story->create($user_id, $this->form_validation->set_value('title'), $file_data, $this->form_validation->set_value('caption'));
+          $story_id = $this->lib_story->create($user_id, $this->form_validation->set_value('title'), $file_data, $this->form_validation->set_value('caption'));
 
-          redirect('story/index/'.$page_id);
+          redirect('story/index/'.$story_id);
         }
         else
         {

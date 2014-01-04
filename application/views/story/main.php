@@ -8,7 +8,7 @@
       if (!empty($story_data['parent_page']))
       {
         ?>
-        <a href="<?php echo base_url('story/index/'.$story_data['parent_page']['page_id']); ?>">
+        <a href="<?php echo base_url('story/index/'.$story_data['parent_page']['story_id']); ?>">
           <div class="thumbnail">
             <div class="thumb rect-responsive" style="background-image: url('<?php echo base_url('uploads/'.$story_data['parent_page']['file_name']); ?>');"></div>
           </div>
@@ -27,7 +27,7 @@
         ?>
         <div class="row">
           <div class="col-xs-8">
-            <a href="<?php echo base_url('story/index/'.$c['page_id']); ?>">
+            <a href="<?php echo base_url('story/index/'.$c['story_id']); ?>">
               <div class="thumbnail">
                 <div class="thumb rect-responsive" style="background-image: url('<?php echo base_url('uploads/'.$c['file_name']); ?>');"></div>
               </div>
@@ -38,7 +38,7 @@
             foreach ($c['child_list'] as $cc)
             {
               ?>
-              <a href="<?php echo base_url('story/index/'.$cc['page_id']); ?>">
+              <a href="<?php echo base_url('story/index/'.$cc['story_id']); ?>">
                 <div class="thumbnail">
                   <div class="thumb rect-responsive" style="background-image: url('<?php echo base_url('uploads/'.$cc['file_name']); ?>');"></div>
                 </div>
@@ -58,7 +58,7 @@
         ?>
         <div class="row">
           <div class="col-xs-8">
-            <a href="<?php echo base_url('story/add/'.$story_data['story']['page_id']); ?>">
+            <a href="<?php echo base_url('story/add/'.$story_data['story']['story_id']); ?>">
               <img class="img-responsive" src="http://placehold.it/350&text=Add+Page">
             </a>
           </div>
