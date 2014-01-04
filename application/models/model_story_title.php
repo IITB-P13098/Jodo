@@ -21,9 +21,9 @@ class Model_story_title extends CI_Model
     return $this->db->count_all_results($this->story_table);
   }
 
-  function get_recent($per_page, $index)
+  function get_recent($per_page, $page_id)
   {
-    $this->db->limit($per_page, $index * $per_page);
+    $this->db->limit($per_page, $page_id * $per_page);
 
     $this->db->select($this->story_table.'.*');
     $this->db->select($this->story_title_table.'.title');

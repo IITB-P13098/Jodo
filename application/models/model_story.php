@@ -47,9 +47,9 @@ class Model_story extends CI_Model
     return $query->row_array();
   }
   
-  public function get_child_list($story_id, $per_page = 3, $index = 0)
+  public function get_child_list($story_id, $per_page = 3, $page_id = 0)
   {
-    $this->db->limit($per_page, $index * $per_page);
+    $this->db->limit($per_page, $page_id * $per_page);
 
     $this->db->select($this->story_table.'.*');
     $this->db->select($this->images_table.'.file_name');
@@ -75,9 +75,9 @@ class Model_story extends CI_Model
     return $this->db->count_all_results($this->story_table);
   }
 
-  function get_user_stories($user_id, $per_page = 5, $index = 0)
+  function get_user_stories($user_id, $per_page = 5, $page_id = 0)
   {
-    $this->db->limit($per_page, $index * $per_page);
+    $this->db->limit($per_page, $page_id * $per_page);
 
     $this->db->select($this->story_table.'.*');
     $this->db->select($this->story_title_table.'.title');

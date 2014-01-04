@@ -95,23 +95,23 @@ class Lib_story
     return $data;
   }
 
-  function get_recent($index = 0)
+  function get_recent($page_id = 0)
   {
     $this->ci->load->config('story', TRUE);
 
     $this->ci->load->model('model_story_title');
-    $data['story'] = $this->ci->model_story_title->get_recent($this->ci->config->item('stories_per_page', 'story'), $index);
+    $data['story'] = $this->ci->model_story_title->get_recent($this->ci->config->item('stories_per_page', 'story'), $page_id);
     $data['count'] = $this->ci->model_story_title->get_count();
 
     return $data;
   }
 
-  function get_users_recent($user_id, $index = 0)
+  function get_users_recent($user_id, $page_id = 0)
   {
     $this->ci->load->config('story', TRUE);
 
     $this->ci->load->model('model_story');
-    $data['story'] = $this->ci->model_story->get_user_stories($user_id, $this->ci->config->item('stories_per_page', 'story'), $index);
+    $data['story'] = $this->ci->model_story->get_user_stories($user_id, $this->ci->config->item('stories_per_page', 'story'), $page_id);
     $data['count'] = $this->ci->model_story->get_user_stories_count($user_id);
 
     return $data;
