@@ -25,4 +25,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: 'Lato', Sans
 
 .text-wrap { word-wrap: break-word; }
 
+.thumbnail { padding: 0; border-radius: 0; border: 0;}
+
 footer .credits { margin-top: 50px; margin-bottom: 30px; }

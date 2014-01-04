@@ -50,11 +50,25 @@ class Model_page extends CI_Model
     return $query->row_array();
   }
   
-  public function get_child_list($page_id)
+  public function get_child_list($page_id, $index = 0, $limit = 3)
   {
+    $this->db->limit($limit, $index);
+
+    $this->db->select($this->page_table.'.*');
+    $this->db->select($this->images_table.'.file_name');
+    
+    $this->db->from($this->page_table);
+    $this->db->join($this->images_table, $this->page_table.'.image_id = '.$this->images_table.'.image_id');
+    
     $this->db->where('parent_page_id', $page_id);
     
-    $query = $this->db->get($this->page_table);
+    $query = $this->db->get();
     return $query->result_array();
+  }
+
+  public function get_child_count($page_id)
+  {
+    $this->db->where('parent_page_id', $page_id);
+    return $this->db->count_all_results($this->page_table);
   }
 }

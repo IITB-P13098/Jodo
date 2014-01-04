@@ -9,7 +9,7 @@
       {
         ?>
         <a href="<?php echo base_url('story/index/'.$story_data['parent_page']['page_id']); ?>">
-          <div class="thumbanil">
+          <div class="thumbnail">
             <div class="thumb rect-responsive" style="background-image: url('<?php echo base_url('uploads/'.$story_data['parent_page']['file_name']); ?>');"></div>
           </div>
         </a>
@@ -21,21 +21,37 @@
       <img class="img-responsive" src="<?php echo base_url('uploads/'.$story_data['story']['file_name']); ?>">
     </div>
     <div class="col-xs-3">
-      <div class="row">
-        <?php
-        foreach ($story_data['child_list'] as $c)
-        {
-          break;
-          ?>
-          <div class="child">
+      <?php
+      foreach ($story_data['child_list'] as $c)
+      {
+        ?>
+        <div class="row">
+          <div class="col-xs-8">
             <a href="<?php echo base_url('story/index/'.$c['page_id']); ?>">
-              <img src="<?php echo base_url('images/story/'.$c['image_id']); ?>">
+              <div class="thumbnail">
+                <div class="thumb rect-responsive" style="background-image: url('<?php echo base_url('uploads/'.$c['file_name']); ?>');"></div>
+              </div>
             </a>
           </div>
-          <?php
-        }
-        ?>
-      </div>
+          <div class="col-xs-4">
+            <?php
+            foreach ($c['child_list'] as $cc)
+            {
+              ?>
+              <a href="<?php echo base_url('story/index/'.$cc['page_id']); ?>">
+                <div class="thumbnail">
+                  <div class="thumb rect-responsive" style="background-image: url('<?php echo base_url('uploads/'.$cc['file_name']); ?>');"></div>
+                </div>
+              </a>
+              <?php
+            }
+            ?>
+          </div>
+        </div>
+        <?php
+      }
+      ?>
+
       <?php
       if ($is_logged_in)
       {
