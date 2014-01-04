@@ -76,11 +76,11 @@
       </blockquote>
 
       <div class="media">
-        <a class="pull-left" href="#">
+        <a class="pull-left" href="<?php echo base_url('home/profile/'.$story_data['user']['username']); ?>">
           <div class="media-object thumb" style="background-image: url('<?php echo 'http://rimebeta.com/do/file/thumbnail/'.(!empty($story_data['user']['profile_image_id']) ? $story_data['user']['profile_image_id'] : '0').'/s/profile'; ?>'); width:50px; height:50px;"></div>
         </a>
         <div class="media-body">
-          <h4 class="media-heading"><a href="#"><?php echo $story_data['user']['disp_name']; ?></a> | <small><?php echo $story_data['user']['username']; ?></small></h4>
+          <h4 class="media-heading"><a href="<?php echo base_url('home/profile/'.$story_data['user']['username']); ?>"><?php echo $story_data['user']['disp_name']; ?></a> | <small><?php echo $story_data['user']['username']; ?></small></h4>
           <?php echo $story_data['user']['bio']; ?>
         </div>
       </div>

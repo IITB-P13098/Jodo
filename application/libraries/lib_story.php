@@ -84,13 +84,35 @@ class Lib_story
     $data['child_list'] = $this->ci->model_page->get_child_list($page_id);
     foreach ($data['child_list'] as $key => $value)
     {
-      $data['child_list'][$key]['child_list'] = $this->ci->model_page->get_child_list($value['page_id'], 0, 2);
+      $data['child_list'][$key]['child_list'] = $this->ci->model_page->get_child_list($value['page_id'], 2);
     }
 
     $data['child_count'] = $this->ci->model_page->get_child_count($page_id);
 
     $this->ci->load->library('lib_user_profile');
     $data['user'] = $this->ci->lib_user_profile->get_user_profile_by_id($story['user_id']);
+
+    return $data;
+  }
+
+  function get_recent($index = 0)
+  {
+    $this->ci->load->config('story', TRUE);
+
+    $this->ci->load->model('model_story');
+    $data['story'] = $this->ci->model_story->get_recent($this->ci->config->item('stories_per_page', 'story'), $index);
+    $data['count'] = $this->ci->model_story->get_count();
+
+    return $data;
+  }
+
+  function get_users_recent($user_id, $index = 0)
+  {
+    $this->ci->load->config('story', TRUE);
+
+    $this->ci->load->model('model_page');
+    $data['story'] = $this->ci->model_page->get_user_pages($user_id, $this->ci->config->item('stories_per_page', 'story'), $index);
+    $data['count'] = $this->ci->model_page->get_user_pages_count($user_id);
 
     return $data;
   }

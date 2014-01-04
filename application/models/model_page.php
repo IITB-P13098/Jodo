@@ -21,9 +21,7 @@ class Model_page extends CI_Model
   public function get_story_data_by_id($page_id)
   {
     $this->db->select($this->page_table.'.*');
-    $this->db->select($this->story_table.'.story_id');
     $this->db->select($this->story_table.'.title');
-    //$this->db->select($this->story_table.'.created');
     $this->db->select($this->images_table.'.file_name');
     
     $this->db->from($this->page_table);
@@ -50,9 +48,9 @@ class Model_page extends CI_Model
     return $query->row_array();
   }
   
-  public function get_child_list($page_id, $index = 0, $limit = 3)
+  public function get_child_list($page_id, $per_page = 3, $index = 0)
   {
-    $this->db->limit($limit, $index);
+    $this->db->limit($per_page, $index * $per_page);
 
     $this->db->select($this->page_table.'.*');
     $this->db->select($this->images_table.'.file_name');
@@ -70,5 +68,29 @@ class Model_page extends CI_Model
   {
     $this->db->where('parent_page_id', $page_id);
     return $this->db->count_all_results($this->page_table);
+  }
+
+  function get_user_pages_count($user_id)
+  {
+    $this->db->where('user_id', $user_id);
+    return $this->db->count_all_results($this->page_table);
+  }
+
+  function get_user_pages($user_id, $per_page = 5, $index = 0)
+  {
+    $this->db->limit($per_page, $index * $per_page);
+
+    $this->db->select($this->page_table.'.*');
+    $this->db->select($this->story_table.'.title');
+    $this->db->select($this->images_table.'.file_name');
+    
+    $this->db->from($this->page_table);
+    $this->db->join($this->story_table, $this->page_table.'.story_id = '.$this->story_table.'.story_id');
+    $this->db->join($this->images_table, $this->page_table.'.image_id = '.$this->images_table.'.image_id');
+    
+    $this->db->where($this->page_table.'.user_id', $user_id);
+    
+    $query = $this->db->get();
+    return $query->result_array();
   }
 }
