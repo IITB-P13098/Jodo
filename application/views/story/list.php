@@ -2,7 +2,7 @@
 
 <div class="col-xs-12">
 
-  <div class="row">
+  <div class="story-list row">
     <?php
     foreach ($story as $s)
     {

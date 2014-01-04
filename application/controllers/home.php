@@ -46,6 +46,8 @@ class Home extends CI_Controller
       show_error('invalid username');
     }
 
+    $data['page_title'] = $data['req_user_data']['disp_name'];
+    
     $this->load->library('lib_story');
     $story_data = $this->lib_story->get_users_recent($data['req_user_data']['user_id']);
 

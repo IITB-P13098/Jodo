@@ -14,6 +14,8 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: 'Lato', Sans
 
 .container { max-width: none !important; width: 970px; }
 
+a:hover { text-decoration: none; }
+
 .thumb {
   display: inline-block;
   background-color: #F0EAED;
@@ -27,4 +29,12 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: 'Lato', Sans
 
 .thumbnail { padding: 0; border-radius: 0; border: 0;}
 
+.media-heading a { color: #35424A; }
+
+
 footer .credits { margin-top: 50px; margin-bottom: 30px; }
+
+.user-head { margin-bottom: 20px; }
+
+.story-list .caption { text-overflow: ellipsis; white-space: nowrap; overflow: hidden;  }
+
