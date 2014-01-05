@@ -16,6 +16,15 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: 'Open Sans',
 
 a:hover { text-decoration: none; }
 
+.btn { border-radius: 0 !important; }
+.form-control, .has-error .form-control { border-radius: 0px; box-shadow: none; }
+.input-group-addon { border-radius: 0px; }
+
+.modal-content { border-radius: 0; }
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus { border-radius: 0; background-color: #D90472; }
+.nav-pills>li>a, .nav-pills>li>a:hover, .nav-pills>li>a:focus { border-radius: 0; }
+
 .thumb {
   display: inline-block;
   background-color: #F0EAED;
@@ -36,6 +45,7 @@ footer .credits { margin-top: 50px; margin-bottom: 30px; }
 
 .user-head { margin-bottom: 20px; }
 
+.story-list .thumbnail { margin-bottom: 30px; }
 .story-list .caption { text-overflow: ellipsis; white-space: nowrap; overflow: hidden; padding: 0; }
 .story-title a { color: #35424A; }
 .story-title a:hover { color: #35424A; }

@@ -65,7 +65,7 @@ class Lib_story
     return $story_id;
   }
   
-  public function get_data($story_id, $page_id)
+  public function get_data($story_id, $page_id = 0)
   {
     $story = $this->ci->model_story->get_story_data_by_id($story_id);
     if (empty($story))
