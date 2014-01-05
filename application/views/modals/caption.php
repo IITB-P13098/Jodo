@@ -5,7 +5,7 @@ $caption = array(
   'value'         => set_value('caption', $caption),
   'maxlength'     => $this->config->item('caption_max_length', 'story'),
   'style'         => 'resize: none',
-  'rows'          => 2,
+  'rows'          => 3,
   'class'         => 'form-control',
 );
 ?>
