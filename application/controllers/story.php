@@ -18,10 +18,13 @@ class Story extends CI_Controller
 
     $this->load->library('lib_story');
 
-    if (is_null($story_data = $this->lib_story->get_data($story_id)))
+    if (is_null($story_data = $this->lib_story->get_data($story_id, $page_id)))
     {
       show_error($this->lib_story->get_error_message());
     }
+
+    $data['prev_page'] = $page_id > 0 ? $page_id-1 : 0;
+    $data['next_page'] = floor(($story_data['child_count']-1) / 3) > $page_id ? $page_id+1 : 0;
 
     $data['story_data'] = $story_data;
     $data['page_title'] = $story_data['story']['title'];

@@ -114,6 +114,8 @@ class Model_story extends CI_Model
   {
     $this->db->limit($per_page, $page_id * $per_page);
 
+    $this->db->order_by('story_id', 'DESC');
+
     $this->db->select($this->story_table.'.*');
     $this->db->select($this->story_title_table.'.title');
     $this->db->select($this->images_table.'.file_name');

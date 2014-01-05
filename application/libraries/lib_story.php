@@ -65,7 +65,7 @@ class Lib_story
     return $story_id;
   }
   
-  public function get_data($story_id)
+  public function get_data($story_id, $page_id)
   {
     $story = $this->ci->model_story->get_story_data_by_id($story_id);
     if (empty($story))
@@ -81,7 +81,7 @@ class Lib_story
       $data['parent_story'] = $this->ci->model_story->get_data_by_id($story['parent_story_id']);
     }
 
-    $data['child_list'] = $this->ci->model_story->get_child_list($story_id);
+    $data['child_list'] = $this->ci->model_story->get_child_list($story_id, 3, $page_id);
     foreach ($data['child_list'] as $key => $value)
     {
       $data['child_list'][$key]['child_list'] = $this->ci->model_story->get_child_list($value['story_id'], 2);
@@ -143,23 +143,19 @@ class Lib_story
     return TRUE;
   }
 
-  function get_recent($page_id = 0)
+  function get_recent($stories_per_page, $page_id = 0)
   {
-    $this->ci->load->config('story', TRUE);
-
     $this->ci->load->model('model_story_title');
-    $data['story'] = $this->ci->model_story_title->get_recent($this->ci->config->item('stories_per_page', 'story'), $page_id);
+    $data['story'] = $this->ci->model_story_title->get_recent($stories_per_page, $page_id);
     $data['count'] = $this->ci->model_story_title->get_count();
 
     return $data;
   }
 
-  function get_users_recent($user_id, $page_id = 0)
+  function get_users_recent($user_id, $stories_per_page, $page_id = 0)
   {
-    $this->ci->load->config('story', TRUE);
-
     $this->ci->load->model('model_story');
-    $data['story'] = $this->ci->model_story->get_user_stories($user_id, $this->ci->config->item('stories_per_page', 'story'), $page_id);
+    $data['story'] = $this->ci->model_story->get_user_stories($user_id, $stories_per_page, $page_id);
     $data['count'] = $this->ci->model_story->get_user_stories_count($user_id);
 
     return $data;

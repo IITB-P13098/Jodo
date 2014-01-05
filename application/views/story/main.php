@@ -69,6 +69,19 @@
       ?>
 
       <?php
+      if (!empty($next_page))
+      {
+        ?>
+        <div class="row">
+          <div class="col-xs-8">
+            <a class="btn btn-link btn-block" href="<?php echo base_url('story/index/'.$story_data['story']['story_id'].'/'.$next_page); ?>"><span class="glyphicon glyphicon-chevron-down"></span></a>
+          </div>
+        </div>
+        <?php
+      }
+      ?>
+
+      <?php
       if ($is_logged_in)
       {
         ?>

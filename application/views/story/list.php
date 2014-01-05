@@ -17,5 +17,18 @@
     }
     ?>
   </div>
+
+  <?php
+  if (!empty($next_page))
+  {
+    ?>
+    <div class="row">
+      <div class="col-xs-4 col-xs-offset-4">
+        <a class="btn btn-primary btn-block" href="<?php echo base_url($next_page); ?>">More</a>
+      </div>
+    </div>
+    <?php
+  }
+  ?>
   
 </div>
