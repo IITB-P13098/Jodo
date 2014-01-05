@@ -36,6 +36,9 @@ footer .credits { margin-top: 50px; margin-bottom: 30px; }
 
 .user-head { margin-bottom: 20px; }
 
-.story-list .caption { text-overflow: ellipsis; white-space: nowrap; overflow: hidden;  }
-.story-title .a { color: #35424A; }
-
+.story-list .caption { text-overflow: ellipsis; white-space: nowrap; overflow: hidden; padding: 0; }
+.story-title a { color: #35424A; }
+.story-title a:hover { color: #35424A; }
+.story-title { margin-bottom: 30px; }
+.story-main { margin-bottom: 20px; }
+.story-main .current { margin-bottom: 20px; }

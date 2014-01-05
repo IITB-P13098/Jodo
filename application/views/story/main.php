@@ -2,7 +2,7 @@
 
 <div class="col-xs-12">
 
-  <div class="row">
+  <div class="story-main row">
     <div class="col-xs-2">
       <?php
       if (!empty($story_data['parent_story']))
@@ -18,7 +18,7 @@
       ?>
     </div>
     <div class="col-xs-7">
-      <img class="img-responsive" src="<?php echo base_url('uploads/'.$story_data['story']['file_name']); ?>">
+      <img class="current img-responsive" src="<?php echo base_url('uploads/'.$story_data['story']['file_name']); ?>">
 
       <div class="row">
         <div class="col-xs-4 col-xs-offset-8">
