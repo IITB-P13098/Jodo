@@ -56,9 +56,10 @@ class Model_story extends CI_Model
     return $query->row_array();
   }
 
-  public function purge_by_id($story_id)
+  public function purge_by_id($story_id, $user_id)
   {
     $this->db->where('story_id', $story_id);
+    $this->db->where('user_id', $user_id);
     $this->db->delete($this->story_table);
   }
   

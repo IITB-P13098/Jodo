@@ -95,6 +95,26 @@ class Lib_story
     return $data;
   }
 
+  function delete($story_id, $user_id)
+  {
+    $story = $this->ci->model_story->get_data_by_id($story_id);
+    if (empty($story))
+    {
+      $this->error = array('message' => 'story not found');
+      return NULL;
+    }
+
+    $child_list = $this->ci->model_story->get_child_list($story_id);
+    if (!empty($child_list))
+    {
+      $this->error = array('message' => 'can not delete when child exists');
+      return NULL;
+    }
+
+    $this->ci->model_story->purge_by_id($story_id, $user_id);
+    return TRUE;
+  }
+
   function get_recent($page_id = 0)
   {
     $this->ci->load->config('story', TRUE);

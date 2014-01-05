@@ -37,4 +37,5 @@ footer .credits { margin-top: 50px; margin-bottom: 30px; }
 .user-head { margin-bottom: 20px; }
 
 .story-list .caption { text-overflow: ellipsis; white-space: nowrap; overflow: hidden;  }
+.story-title .a { color: #35424A; }
 

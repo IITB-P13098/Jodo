@@ -19,6 +19,22 @@
     </div>
     <div class="col-xs-7">
       <img class="img-responsive" src="<?php echo base_url('uploads/'.$story_data['story']['file_name']); ?>">
+
+      <div class="row">
+        <div class="col-xs-4 col-xs-offset-8">
+          <?php
+          if (empty($story_data['child_list']) AND $story_data['story']['user_id'] == $user_data['user_id'])
+          {
+            $key_id = 'modal-delete-story-'.$story_data['story']['story_id'];
+            $url = base_url('do_story/delete/'.$story_data['story']['story_id'].( !empty($story_data['story']['parent_story_id']) ? '?redirect=story/index/'.$story_data['story']['parent_story_id'] : '') );
+            ?>
+            <a class="btn btn-danger btn-block" data-toggle="modal" data-target="#<?php echo $key_id; ?>" href="<?php echo $url; ?>"><span class="glyphicon glyphicon-remove-circle"></span> Delete Story</a>
+            <div class="modal fade" id="<?php echo $key_id; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+            <?php
+          }
+          ?>
+        </div>
+      </div>
     </div>
     <div class="col-xs-3">
       <?php
@@ -71,9 +87,16 @@
 
   <div class="row">
     <div class="col-xs-7 col-xs-offset-2">
-      <blockquote>
-        <p><?php echo $story_data['story']['caption']; ?></p>
-      </blockquote>
+      <?php
+      if (!empty($story_data['story']['caption']))
+      {
+        ?>
+        <blockquote>
+          <p><?php echo $story_data['story']['caption']; ?></p>
+        </blockquote>
+        <?php
+      }
+      ?>
 
       <div class="media">
         <a class="pull-left" href="<?php echo base_url('home/profile/'.$story_data['user']['username']); ?>">
