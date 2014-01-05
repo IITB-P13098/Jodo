@@ -97,13 +97,6 @@ class Lib_story
 
   function delete($story_id, $user_id)
   {
-    $story = $this->ci->model_story->get_data_by_id($story_id);
-    if (empty($story))
-    {
-      $this->error = array('message' => 'story not found');
-      return NULL;
-    }
-
     $child_list = $this->ci->model_story->get_child_list($story_id);
     if (!empty($child_list))
     {
@@ -112,6 +105,41 @@ class Lib_story
     }
 
     $this->ci->model_story->purge_by_id($story_id, $user_id);
+    return TRUE;
+  }
+
+  function edit_title($story_id, $user_id, $title)
+  {
+    $this->ci->load->helper(array('text'));
+
+    $title = htmlspecialchars($title);
+    $title = ascii_to_entities($title);
+
+    $story = $this->ci->model_story->get_story_data_by_id($story_id);
+    if (empty($story))
+    {
+      $this->error = array('message' => 'story not found');
+      return NULL;
+    }
+
+    if ($story['user_id'] != $user_id)
+    {
+      $this->error = array('message' => 'story not found');
+      return NULL;
+    }
+
+    $this->ci->model_story->update_title($story['start_story_id'], $title);
+    return TRUE;
+  }
+
+  function edit_caption($story_id, $user_id, $caption)
+  {
+    $this->ci->load->helper(array('text'));
+
+    $caption = htmlspecialchars($caption);
+    $caption = ascii_to_entities($caption);
+    
+    $this->ci->model_story->update_caption($story_id, $user_id, $caption);
     return TRUE;
   }
 

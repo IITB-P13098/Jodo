@@ -26,6 +26,25 @@ class Model_story extends CI_Model
     return $story_id;
   }
 
+  public function update_title($story_id, $title)
+  {
+    $this->db->set('title', $title);
+
+    $this->db->where('story_id', $story_id);
+
+    $this->db->update($this->story_title_table);
+  }
+
+  public function update_caption($story_id, $user_id, $caption)
+  {
+    $this->db->set('caption', $caption);
+
+    $this->db->where('story_id', $story_id);
+    $this->db->where('user_id', $user_id);
+
+    $this->db->update($this->story_table);
+  }
+
   public function get_story_data_by_id($story_id)
   {
     $this->db->select($this->story_table.'.*');

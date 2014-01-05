@@ -45,12 +45,53 @@ class Do_story extends CI_Controller
     redirect($redirect);
   }
 
-  function edit_title($story_id)
+  function edit_title($story_id, $title = '')
   {
+    $user_id = $this->tank_auth->get_user_id();
+
+    $data['title'] = rawurldecode($title);
+
+    $this->load->helper(array('form', 'url'));
+    $this->load->library('form_validation');
+    $this->load->library('security');
+
+    $this->load->config('story', TRUE);
+    
+    $this->form_validation->set_rules('title', 'Title', 'trim|required|xss_clean|max_length['.$this->config->item('title_max_length', 'story').']');
+
+    if ($this->form_validation->run())
+    {
+      $this->load->library('lib_story');
+      $this->lib_story->edit_title($story_id, $user_id, $this->form_validation->set_value('title'));
+      
+      redirect('story/index/'.$story_id);
+    }
+
+    $this->load->view('modals/title', $data);
   }
 
-  function edit_caption($story_id)
+  function edit_caption($story_id, $caption = '')
   {
+    $user_id = $this->tank_auth->get_user_id();
+
+    $data['caption'] = rawurldecode($caption);
+
+    $this->load->helper(array('form', 'url'));
+    $this->load->library('form_validation');
+    $this->load->library('security');
+
+    $this->load->config('story', TRUE);
+    $this->form_validation->set_rules('caption', 'Caption', 'trim|required|xss_clean|max_length['.$this->config->item('caption_max_length', 'story').']');
+
+    if ($this->form_validation->run())
+    {
+      $this->load->library('lib_story');
+      $this->lib_story->edit_caption($story_id, $user_id, $this->form_validation->set_value('caption'));
+      
+      redirect('story/index/'.$story_id);
+    }
+
+    $this->load->view('modals/caption', $data);
   }
 }
 
