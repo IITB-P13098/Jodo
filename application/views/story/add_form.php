@@ -8,6 +8,7 @@ $caption = array(
   'id'            => 'caption',
   'value'         => set_value('caption'),
   'maxlength'     => $this->config->item('caption_max_length', 'story'),
+  'placeholder'   => $this->config->item('caption_max_length', 'story').' char max',
   'style'         => 'resize: none',
   'rows'          => 3,
   'class'         => 'form-control',
