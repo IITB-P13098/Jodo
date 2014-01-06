@@ -18,8 +18,17 @@
       ?>
     </div>
     <div class="col-xs-7">
-      <img class="current img-responsive" src="<?php echo base_url('uploads/'.$story_data['story']['file_name']); ?>">
-
+      <?php
+      if (!empty($story_data['parent_story']))
+      {
+        ?>
+        <div class="connector"></div>
+        <?php
+      }
+      ?>
+      <div class="thumbnail">
+        <img class="img-responsive" src="<?php echo base_url('uploads/'.$story_data['story']['file_name']); ?>">
+      </div>
       <div class="row">
         <div class="col-xs-4 col-xs-offset-8">
           <?php
@@ -47,6 +56,7 @@
         <div class="row">
           <div class="col-xs-8">
             <a href="<?php echo base_url('story/index/'.$c['story_id']); ?>">
+              <div class="connector"></div>
               <div class="thumbnail">
                 <div class="thumb rect-responsive" style="background-image: url('<?php echo base_url('uploads/'.$c['file_name']); ?>');"></div>
               </div>
@@ -58,6 +68,7 @@
             {
               ?>
               <a href="<?php echo base_url('story/index/'.$cc['story_id']); ?>">
+                <div class="connector"></div>
                 <div class="thumbnail">
                   <div class="thumb rect-responsive" style="background-image: url('<?php echo base_url('uploads/'.$cc['file_name']); ?>');"></div>
                 </div>
@@ -90,9 +101,12 @@
         ?>
         <div class="row">
           <div class="col-xs-8">
-            <a href="<?php echo base_url('story/add/'.$story_data['story']['story_id']); ?>">
-              <img class="img-responsive" src="http://placehold.it/350&text=Add+Page">
-            </a>
+            <div class="connector"></div>
+            <div class="thumbnail">
+              <a href="<?php echo base_url('story/add/'.$story_data['story']['story_id']); ?>">
+                <img class="img-responsive" src="http://placehold.it/350&text=Add+Page">
+              </a>
+            </div>
           </div>
         </div>
         <?php

@@ -7,7 +7,7 @@
         ?>
         <div class="thumbnail">
           <a href="<?php echo base_url('story/compose'); ?>">
-            <img class="img-responsive" src="http://placehold.it/350&text=Add+Story">
+            <img class="img-responsive" src="http://placehold.it/350&text=Add+Your+Story">
           </a>
         </div>
         <?php
