@@ -55,7 +55,7 @@ footer .credits { margin-top: 50px; margin-bottom: 30px; }
 .story-title { margin-bottom: 30px; }
 /* .story-main { margin-bottom: 20px; } */
 
-.story-main .modal-dialog { width: 90%; }
+.image-zoom .modal-dialog { width: 90%; }
 .photo-holder { width: 100%; text-align: center; }
 .photo-holder .img-responsive { display: inline-block; }
 
