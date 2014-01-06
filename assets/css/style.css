@@ -53,6 +53,10 @@ footer .credits { margin-top: 50px; margin-bottom: 30px; }
 .story-title a { color: #35424A; }
 .story-title a:hover { color: #35424A; }
 .story-title { margin-bottom: 30px; }
-.story-main { margin-bottom: 20px; }
+/* .story-main { margin-bottom: 20px; } */
+
+.story-main .modal-dialog { width: 90%; }
+.photo-holder { width: 100%; text-align: center; }
+.photo-holder .img-responsive { display: inline-block; }
 
 .connector { position: absolute; height: 30px; width: 30px; left: -15px; border-bottom: solid 1px #333; }
