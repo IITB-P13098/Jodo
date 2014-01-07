@@ -23,25 +23,34 @@ class Lib_story
     return $this->error;
   }
 
-  function create($user_id, $title, $image_data, $caption = '')
+  function create($user_id, $title, $cover_image_data, $image_data, $cover_caption = '', $caption = '')
   {
     $this->ci->load->helper(array('text'));
     
     $title = htmlspecialchars($title);
     $title = ascii_to_entities($title);
     
+    $cover_caption = htmlspecialchars($cover_caption);
+    $cover_caption = ascii_to_entities($cover_caption);
+
     $caption = htmlspecialchars($caption);
     $caption = ascii_to_entities($caption);
 
     $this->ci->db->trans_start();
+    //cover story
     $this->ci->load->model('model_story');
-    $story_id = $this->ci->model_story->create($user_id, $caption);
+    $story_id = $this->ci->model_story->create($user_id, $cover_caption);
 
     $this->ci->load->model('model_image');
-    $this->ci->model_image->create($story_id, $image_data);
+    $this->ci->model_image->create($story_id, $cover_image_data);
 
     $this->ci->load->model('model_story_title');
     $this->ci->model_story_title->create($story_id, $title);
+
+    //first page
+    $child_story_id = $this->ci->model_story->create($user_id, $caption, $story_id, $story_id);
+
+    $this->ci->model_image->create($child_story_id, $image_data);
     $this->ci->db->trans_complete();
 
     return $story_id;
@@ -51,6 +60,12 @@ class Lib_story
   {
     $this->ci->load->helper(array('text'));
     
+    if ($parent_story_id == NULL)
+    {
+      $this->error = array('message' => 'cannot add to cover image');
+      return NULL;
+    }
+
     $caption = htmlspecialchars($caption);
     $caption = ascii_to_entities($caption);
 
@@ -104,8 +119,17 @@ class Lib_story
       return NULL;
     }
 
-    $this->ci->model_story->purge_by_id($story_id, $user_id);
-    return TRUE;
+    $story = $this->ci->model_story->get_story_data_by_id($story_id);
+    if ($story['parent_story_id'] == $story['start_story_id'])
+    {
+      $this->ci->model_story->purge_by_id($story['start_story_id'], $user_id);
+      return TRUE;
+    }
+    else
+    {
+      $this->ci->model_story->purge_by_id($story_id, $user_id);
+      return TRUE;
+    }
   }
 
   function edit_title($story_id, $user_id, $title)

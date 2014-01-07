@@ -131,29 +131,46 @@ class Story extends CI_Controller
     $data['page_title'] = 'New Story';
 
     $this->form_validation->set_rules('title', 'Title', 'trim|required|xss_clean|max_length['.$this->config->item('title_max_length', 'story').']');
+    $this->form_validation->set_rules('cover_caption', 'Cover Caption', 'trim|xss_clean|max_length['.$this->config->item('caption_max_length', 'story').']');
     $this->form_validation->set_rules('caption', 'Caption', 'trim|xss_clean|max_length['.$this->config->item('caption_max_length', 'story').']');
     
     if ($this->form_validation->run())
     {
-      if ($this->upload->do_upload())
+      if ($this->upload->do_upload('userfile_cover'))
       {
-        $file_data = $this->upload->data();
+        $file_data_cover = $this->upload->data();
 
-        if ($file_data['is_image'])
+        if ($file_data_cover['is_image'])
         {
-          $this->load->library('lib_story');
-          $story_id = $this->lib_story->create($user_id, $this->form_validation->set_value('title'), $file_data, $this->form_validation->set_value('caption'));
+          if ($this->upload->do_upload())
+          {
+            $file_data = $this->upload->data();
 
-          redirect('story/index/'.$story_id);
+            if ($file_data['is_image'])
+            {
+              $this->load->library('lib_story');
+              $story_id = $this->lib_story->create($user_id, $this->form_validation->set_value('title'), $file_data_cover, $file_data, $this->form_validation->set_value('cover_caption'), $this->form_validation->set_value('caption'));
+
+              redirect('story/index/'.$story_id);
+            }
+            else
+            {
+              $data['error']['userfile'] = 'uploaded file is not an image';
+            }
+          }
+          else
+          {
+            $data['error']['userfile'] = $this->upload->display_errors();
+          }
         }
         else
         {
-          $data['error']['userfile'] = 'uploaded file is not an image';
+          $data['error']['userfile_cover'] = 'uploaded file is not an image';
         }
       }
       else
       {
-        $data['error']['userfile'] = $this->upload->display_errors();
+        $data['error']['userfile_cover'] = $this->upload->display_errors();
       }
     }
 
