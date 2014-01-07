@@ -1,7 +1,7 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 $config['title_max_length'] = '250';
-$config['caption_max_length'] = '1000';
+$config['caption_max_length'] = '3000';
 
 $config['stories_per_page'] = '20';
 

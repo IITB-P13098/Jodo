@@ -50,6 +50,7 @@ footer .credits { margin-top: 50px; margin-bottom: 30px; }
 
 .story-list .thumbnail { margin-bottom: 30px; }
 .story-list .caption { text-overflow: ellipsis; white-space: nowrap; overflow: hidden; padding: 0; }
+.story-title { text-transform: uppercase; }
 .story-title a { color: #35424A; }
 .story-title a:hover { color: #35424A; }
 .story-title { margin-bottom: 30px; }
@@ -59,4 +60,4 @@ footer .credits { margin-top: 50px; margin-bottom: 30px; }
 .photo-holder { width: 100%; text-align: center; }
 .photo-holder .img-responsive { display: inline-block; }
 
-.connector { position: absolute; height: 30px; width: 30px; left: -15px; border-bottom: solid 1px #333; }
+.connector { position: absolute; height: 30px; width: 30px; left: -15px; border-bottom: solid 2px #333; }
