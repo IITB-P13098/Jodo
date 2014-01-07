@@ -61,3 +61,4 @@ footer .credits { margin-top: 50px; margin-bottom: 30px; }
 .photo-holder .img-responsive { display: inline-block; }
 
 .connector { position: absolute; height: 30px; width: 30px; left: -15px; border-bottom: solid 2px #333; }
+.connector-new { border-bottom: solid 2px #CCC; }

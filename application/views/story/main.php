@@ -129,7 +129,7 @@
         ?>
         <div class="row">
           <div class="col-xs-8">
-            <div class="connector"></div>
+            <div class="connector connector-new"></div>
             <div class="thumbnail">
               <a href="<?php echo base_url('story/add/'.$story_data['story']['story_id']); ?>">
                 <img class="img-responsive" src="http://placehold.it/350&text=Add+String">
