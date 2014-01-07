@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS user_profiles (
 CREATE TABLE IF NOT EXISTS story (
   story_id          bigint unsigned                     NOT NULL AUTO_INCREMENT,
   user_id           bigint unsigned                     NOT NULL DEFAULT '0',
-  caption           varchar(1024)     COLLATE utf8_bin  DEFAULT NULL,
+  caption           text              COLLATE utf8_bin  DEFAULT NULL,
   parent_story_id   bigint unsigned                     DEFAULT NULL,
   start_story_id    bigint unsigned                     DEFAULT NULL,
   created           timestamp                           NOT NULL DEFAULT CURRENT_TIMESTAMP,
