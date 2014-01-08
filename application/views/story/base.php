@@ -3,7 +3,7 @@
     <?php
     if (!empty($user_data))
     {
-      if ($story_data['story']['user_id'] == $user_data['user_id'])
+      if ($story_data['story']['user_id'] == $user_data['user_id'] AND $story_data['story']['parent_story_id'] == NULL)
       {
         $key_id = 'modal-edit-title-'.$story_data['story']['story_id'];
         $url = base_url('do_story/edit_title/'.$story_data['story']['story_id'].'/'.rawurlencode($story_data['story']['title']));

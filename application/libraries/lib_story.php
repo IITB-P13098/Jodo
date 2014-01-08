@@ -148,11 +148,18 @@ class Lib_story
 
     if ($story['user_id'] != $user_id)
     {
-      $this->error = array('message' => 'story not found');
+      $this->error = array('message' => 'not the owner');
       return NULL;
     }
 
-    $this->ci->model_story->update_title($story['start_story_id'], $title);
+    if ($story['parent_story_id'] != NULL)
+    {
+      $this->error = array('message' => 'not the cover page');
+      return NULL;
+    }
+
+    //$this->ci->model_story->update_title($story['start_story_id'], $title);
+    $this->ci->model_story->update_title($story['story_id'], $title);
     return TRUE;
   }
 
