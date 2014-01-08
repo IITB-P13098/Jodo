@@ -143,7 +143,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="story-caption row">
     <div class="col-xs-7 col-xs-offset-2">
       <?php
       if (!empty($user_data))
