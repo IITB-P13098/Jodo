@@ -74,7 +74,13 @@ class Do_story extends CI_Controller
   {
     $user_id = $this->tank_auth->get_user_id();
 
-    $data['caption'] = rawurldecode($caption);
+    $this->load->library('lib_story');
+    if (is_null($story_data = $this->lib_story->get_data($story_id)))
+    {
+      show_error($this->lib_story->get_error_message());
+    }
+
+    $data['caption'] = html_entity_decode($story_data['caption']);
 
     $this->load->helper(array('form', 'url'));
     $this->load->library('form_validation');

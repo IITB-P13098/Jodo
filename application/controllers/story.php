@@ -18,7 +18,7 @@ class Story extends CI_Controller
 
     $this->load->library('lib_story');
 
-    if (is_null($story_data = $this->lib_story->get_data($story_id, $page_id)))
+    if (is_null($story_data = $this->lib_story->get_all_data($story_id, $page_id)))
     {
       show_error($this->lib_story->get_error_message());
     }
@@ -54,7 +54,7 @@ class Story extends CI_Controller
 
     $this->load->library('lib_story');
 
-    if (is_null($story_data = $this->lib_story->get_data($story_id)))
+    if (is_null($story_data = $this->lib_story->get_all_data($story_id)))
     {
       show_error($this->lib_story->get_error_message());
     }
