@@ -28,7 +28,7 @@ class Do_story extends CI_Controller
       
       $data['heading'] = 'Delete';
       $data['message'] = 'Are you sure you want to delete this story?';
-      $data['delete_url'] = 'do_story/delete/'.$story_id.'/1?redirect='.$redirect;
+      $data['delete_url'] = 'do_story/delete/'.$story_id.'/1?redirect='.rawurlencode($redirect);
 
       $this->load->view('modals/delete', $data);
       return;

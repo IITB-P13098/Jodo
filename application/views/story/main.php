@@ -62,10 +62,10 @@
             if (empty($story_data['child_list']) AND $story_data['story']['user_id'] == $user_data['user_id'])
             {
               $redirect = '';
-              if ($story_data['story']['parent_story_id'] != $story_data['story']['start_story_id']) $redirect = 'redirect=story/index/'.$story_data['story']['parent_story_id'];
+              if ($story_data['story']['parent_story_id'] != $story_data['story']['start_story_id']) $redirect = 'story/index/'.$story_data['story']['parent_story_id'];
 
               $key_id = 'modal-delete-story-'.$story_data['story']['story_id'];
-              $url = base_url('do_story/delete/'.$story_data['story']['story_id'].'?redirect='.$redirect);
+              $url = base_url('do_story/delete/'.$story_data['story']['story_id'].'?redirect='.rawurlencode($redirect));
               ?>
               <a class="btn btn-danger btn-block" data-toggle="modal" data-target="#<?php echo $key_id; ?>" href="<?php echo $url; ?>"><span class="glyphicon glyphicon-remove-circle"></span> Delete Story</a>
               <div class="modal fade" id="<?php echo $key_id; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
