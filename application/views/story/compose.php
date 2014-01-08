@@ -18,7 +18,7 @@ $cover_caption = array(
   'maxlength'     => $this->config->item('caption_max_length', 'story'),
   'placeholder'   => $this->config->item('caption_max_length', 'story').' char max',
   'style'         => 'resize: none',
-  'rows'          => 3,
+  'rows'          => 4,
   'class'         => 'form-control',
 );
 $select_image = array(
@@ -32,7 +32,7 @@ $caption = array(
   'maxlength'     => $this->config->item('caption_max_length', 'story'),
   'placeholder'   => $this->config->item('caption_max_length', 'story').' char max',
   'style'         => 'resize: none',
-  'rows'          => 3,
+  'rows'          => 4,
   'class'         => 'form-control',
 );
 
