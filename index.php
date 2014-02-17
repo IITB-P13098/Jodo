@@ -18,7 +18,13 @@
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-	define('ENVIRONMENT', 'development');
+	//define('ENVIRONMENT', 'development');
+
+	if ($_SERVER['SERVER_NAME'] !== 'localhost')
+    define('ENVIRONMENT', 'production');
+  else
+    define('ENVIRONMENT', 'development');
+  
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
@@ -45,6 +51,12 @@ if (defined('ENVIRONMENT'))
 			exit('The application environment is not set correctly.');
 	}
 }
+
+
+// disbale page cache
+header("Expires: Thu, 19 Nov 1981 08:52:00 GMT");
+header("Cache-Control: no-store, no-cache, must-revalidate");
+
 
 /*
  *---------------------------------------------------------------
