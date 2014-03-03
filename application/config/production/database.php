@@ -49,9 +49,9 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'dsquar_jododbu';
-$db['default']['password'] = 'dsquar_jododbp';
-$db['default']['database'] = 'dsquar_jodo';
+$db['default']['username'] = 'dsquarjododbu';
+$db['default']['password'] = 'dsquarjododbp';
+$db['default']['database'] = 'dsquarjodo';
 $db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = FALSE;

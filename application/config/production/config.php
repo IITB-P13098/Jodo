@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://dsquare.in/jodo';
+$config['base_url']	= 'http://stringyourstory.com/';
 
 /*
 |--------------------------------------------------------------------------
