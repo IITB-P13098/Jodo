@@ -8,8 +8,8 @@ class lib_rime
     
     $this->oa_config['consumer_key']          = 'jodo';
     $this->oa_config['consumer_secret']       = 'jodo_secret';
-    $this->oa_config['authorize_url']         = 'http://rimebeta.com/api/oauth/authenticate';
-    $this->oa_config['access_token_url']      = 'http://rimebeta.com/api/oauth/access_token';    
+    $this->oa_config['authorize_url']         = 'http://rimebeta.com/api/client/authenticate';
+    $this->oa_config['access_token_url']      = 'http://rimebeta.com/api/client/access_token';    
 
     $this->oa_config['redirect_url']          = base_url('auth/callback');
 
