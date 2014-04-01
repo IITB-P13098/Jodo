@@ -23,8 +23,11 @@ CREATE TABLE IF NOT EXISTS ci_sessions (
 --
 
 CREATE TABLE IF NOT EXISTS users (
-  user_id           bigint unsigned                     NOT NULL,
-  username          varchar(50)       COLLATE utf8_bin  NOT NULL,
+  user_id           bigint unsigned                     NOT NULL AUTO_INCREMENT,
+  password          varchar(255)      COLLATE utf8_bin  NOT NULL,
+  email             varchar(100)      COLLATE utf8_bin  NOT NULL UNIQUE,
+  email_verified    tinyint(1)                          NOT NULL DEFAULT '0',
+  email_key         varchar(50)       COLLATE utf8_bin  DEFAULT NULL,
   last_ip           varchar(40)       COLLATE utf8_bin  NOT NULL,
   last_login        datetime                            NOT NULL DEFAULT '0000-00-00 00:00:00',
   created           timestamp                           NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -51,7 +54,7 @@ CREATE TABLE IF NOT EXISTS user_autologin (
 -- --------------------------------------------------------
 
 --
--- Table structure for table services_cache
+-- Table structure for table user_profiles
 --
 
 CREATE TABLE IF NOT EXISTS user_profiles (

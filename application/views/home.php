@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-xs-3">
       <?php
-      if ($is_logged_in)
+      //if ($is_logged_in)
       {
         ?>
         <div class="thumbnail">

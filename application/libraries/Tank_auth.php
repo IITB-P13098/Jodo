@@ -155,43 +155,318 @@ class Tank_auth
   {
     return $this->ci->session->userdata('user_id');
   }
- 
-  function login($profile_data, $remember = TRUE)
+
+  /**
+   * Get username
+   *
+   * @return  string
+   */
+  function get_username()
   {
-    $user_id = $profile_data['user_id'];
-
-    $user = $this->ci->users->get_user_by_id($user_id);
-    if (empty($user))
+    $user_id = $this->get_user_id();
+    if (!empty($user_id))
     {
-      $this->ci->load->model('model_profile');
+      $user = $this->ci->users->get_user_by_id($user_id);
+      return $user['username'];
+    }
+    return NULL;
+  }
 
-      $this->ci->db->trans_start();
-      $this->ci->users->create_user($user_id, $profile_data['username']);
-      $this->ci->model_profile->create_profile($user_id, $profile_data['disp_name']);
-      $this->ci->db->trans_complete();
+  function _verify_captcha()
+  {
+    // no captcha found
+    if (empty($_POST["recaptcha_challenge_field"])) return 'TRUE';
+    
+    $this->ci->load->helper('recaptchalib');
+    $this->ci->load->config('tank_auth', TRUE);
+    
+    $privatekey = $this->ci->config->item('recaptcha_private_key', 'tank_auth');
+    $resp = recaptcha_check_answer ($privatekey,
+                                    $_SERVER["REMOTE_ADDR"],
+                                    $_POST["recaptcha_challenge_field"],
+                                    $_POST["recaptcha_response_field"]);
+    
+    if (!$resp->is_valid)
+    {
+      //die ("The reCAPTCHA wasn't entered correctly. Go back and try it again." .
+      //     "(reCAPTCHA said: " . $resp->error . ")");
+      return FALSE; // the CAPTCHA was entered incorrectly
     }
     else
     {
-      $this->ci->load->model('model_profile');
-
-      $this->ci->db->trans_start();
-      $this->ci->users->update_user($user_id, $profile_data['username']);
-      $this->ci->model_profile->update_profile($user_id, $profile_data['disp_name'], $profile_data['bio_text_data']['html_text'], $profile_data['profile_image_id'], $profile_data['cover_image_id']);
-      $this->ci->db->trans_complete();
+      //die ("reCAPTCHA successful verification");
+      return TRUE; // successful verification
     }
-
-    $this->ci->session->set_userdata(array(
-      'user_id'   => $user_id,
-      'status'    => '1',
-    ));
+  }
+  
+  /**
+   * Create new user on the site and return some data about it:
+   * user_id, username, password, email, new_email_key (if any).
+   *
+   * @param  string
+   * @param  string
+   * @param  string
+   * @param  bool
+   * @return  array
+   */
+  function create_user($disp_name, $email, $password)
+  {
+    $this->error = array();
     
-    if ($remember)
+    if (!$this->ci->users->is_email_available($email))
     {
-      $this->_create_autologin($user_id);
+      $this->error = array('email' => 'email in use');
+      return NULL;
+    }
+    else if (!$this->_verify_captcha())
+    {
+      $this->error = array('captcha' => 'incorrect captcha');
+      return NULL;
+    }
+    
+    // Hash password using phpass
+    $hasher = new PasswordHash(
+        $this->ci->config->item('phpass_hash_strength', 'tank_auth'),
+        $this->ci->config->item('phpass_hash_portable', 'tank_auth'));
+    $hashed_password = $hasher->HashPassword($password);
+    
+    $email_key = md5(rand().microtime());
+
+    $user_data = array(
+      'password'      => $hashed_password,
+      'email'         => $email,
+      'email_key'     => $email_key,
+      'last_ip'       => $this->ci->input->ip_address(),
+    );
+    
+    $this->ci->db->trans_start();
+
+    $user_id = $this->ci->users->create_user($user_data);
+
+    $this->ci->load->model('model_profile');
+    $this->ci->model_profile->create($user_id, $disp_name);
+    
+    $this->ci->db->trans_complete();
+
+    $user_data['user_id'] = $user_id;
+    unset($user_data['password']);
+    unset($user_data['last_ip']);
+    
+    $this->login($email, $password, TRUE);
+
+    return $user_data;
+  }
+
+  function _refresh_email_key($email)
+  {
+    $email_key = md5(rand().microtime());
+    $this->ci->users->update_email_key($email, $email_key);
+    
+    return $email_key;
+  }
+  
+  function verify_email($user_id, $email_key)
+  {
+    $user = $this->ci->users->verify_email_key($user_id, $email_key);
+
+    if (!empty($user))
+    {
+      return $user;
+    }
+    else
+    {
+      $this->error = array('message' => 'Verification failed: Id not found');
+    }
+    return NULL;
+  }
+
+  function email_verified($user_id)
+  {
+    $this->ci->users->email_verified($user_id);
+  }
+  
+  /**
+   * Login user on the site. Return TRUE if login is successful
+   * (user exists and activated, password is correct), otherwise FALSE.
+   *
+   * @param  string  (username or email or both depending on settings in config file)
+   * @param  string
+   * @param  bool
+   * @return  bool
+   */
+  function login($email, $password, $remember)
+  {
+    if ($this->_verify_captcha())
+    {
+      $user = $this->ci->users->get_user_by_email($email);
+      if (!empty($user))
+      {
+        // login ok
+        
+        // Does password match hash in database?
+        $hasher = new PasswordHash(
+          $this->ci->config->item('phpass_hash_strength', 'tank_auth'),
+          $this->ci->config->item('phpass_hash_portable', 'tank_auth'));
+        
+        if ($hasher->CheckPassword($password, $user['password']))
+        {
+          // password ok
+          
+          // success
+          $this->ci->session->set_userdata(array(
+            'user_id'   => $user['user_id'],
+            'status'    => '1',
+          ));
+
+          if ($remember)
+          {
+            $this->_create_autologin($user['user_id']);
+          }
+          
+          $this->clear_login_attempts($email);
+
+          $this->ci->users->update_login_info($user['user_id']);
+          return TRUE;
+        }
+        else
+        {
+          // fail - wrong password
+          $this->increase_login_attempt($email);
+          $this->error = array('password' => 'incorrect password');
+        }
+      }
+      else
+      {
+        // fail - wrong login
+        $this->increase_login_attempt($email);
+        $this->error = array('login' => 'incorrect login');
+      }
+    }
+    else
+    {
+      // fail - wrong captcha
+      $this->increase_login_attempt($email);
+      $this->error = array('captcha' => 'incorrect captcha');
+    }
+  
+    return NULL;
+  }
+
+  function update_email($user_id, $email)
+  {
+    $this->ci->users->update_email($user_id, $email);
+  }
+  
+  function forgot_password($email)
+  {
+    $user = $this->ci->users->get_user_by_email($email);
+    if (!empty($user))
+    {
+      $user['email_key'] = $this->_refresh_email_key($email);
+      return $user;
+    }
+    else
+    {
+      $this->error = array('email' => 'incorrect email');
+    }
+    return NULL;
+  }
+  
+  /**
+   * Replace user password (forgotten) with a new one (set by user)
+   * and return some data about it: user_id, username, new_password, email.
+   *
+   * @param  string
+   * @param  string
+   * @return  bool
+   */
+  function reset_password($user_id, $new_password)
+  {
+    $user = $this->ci->users->get_user_by_id($user_id);
+    if (!empty($user))
+    {
+      // Hash password using phpass
+      $hasher = new PasswordHash(
+        $this->ci->config->item('phpass_hash_strength', 'tank_auth'),
+        $this->ci->config->item('phpass_hash_portable', 'tank_auth'));
+      $hashed_password = $hasher->HashPassword($new_password);
+      
+      $this->ci->db->trans_start();
+
+      $this->ci->users->update_password($user['user_id'], $hashed_password);
+      
+      $this->ci->users->update_email_key($user['email'], NULL);
+
+      // Clear all user's autologins
+      $this->ci->load->model('tank_auth/user_autologin');
+      $this->ci->user_autologin->clear($user['user_id']);
+
+      $this->ci->db->trans_complete();
+
+      return $user;
+    }
+    else
+    {
+      $this->error = array('message' => 'user id not found');
     }
 
-    $this->ci->users->update_login_info($user_id);
-    return TRUE;
+    return NULL;
+  }
+  
+  function change_password($user_id, $password, $new_password)
+  {
+    $user = $this->ci->users->get_user_by_id($user_id);
+    if (!empty($user))
+    {
+      // Hash password using phpass
+      $hasher = new PasswordHash(
+        $this->ci->config->item('phpass_hash_strength', 'tank_auth'),
+        $this->ci->config->item('phpass_hash_portable', 'tank_auth')
+      );
+      
+      if ($hasher->CheckPassword($password, $user['password']))
+      {
+        // password ok
+        $hashed_password = $hasher->HashPassword($new_password);
+        $this->ci->users->update_password($user_id, $hashed_password);
+        
+        return array(
+          'user_id'       => $user_id,
+          'username'      => $user['username'],
+          'email'         => $user['email'],
+          //'new_password'  => $new_password,
+        );
+      }
+      else
+      {
+        // fail - wrong password
+        $this->error = array('password' => 'incorrect password');
+      }
+    }
+    return NULL;
+  }
+  
+  function update_username($user_id, $new_username)
+  {
+    $user = $this->ci->users->get_user_by_username($new_username);
+    
+    if (empty($user))
+    {
+      $this->ci->users->update_username($user_id, $new_username);
+      return TRUE;
+    }
+    else
+    {
+      if ($user['user_id'] != $user_id)
+      {
+        $this->error = array('username' => 'already taken');
+      }
+      else
+      {
+        $this->error = array('username' => 'that\'s you');
+      }
+    }
+    return NULL;
   }
   
   /**
@@ -209,5 +484,60 @@ class Tank_auth
     $this->ci->session->sess_destroy();
     
     //destroy cookies
+  }
+  
+  /**
+   * Check if login attempts exceeded max login attempts (specified in config)
+   *
+   * @param  string
+   * @return  bool
+   */
+  function is_max_login_attempts_exceeded($email)
+  {
+    if ($this->ci->config->item('login_count_attempts', 'tank_auth'))
+    {
+      $this->ci->load->model('tank_auth/login_attempts');
+      return $this->ci->login_attempts->get_attempts_num($this->ci->input->ip_address(), $email) >= $this->ci->config->item('login_max_attempts', 'tank_auth');
+    }
+    return FALSE;
+  }
+  
+  /**
+   * Increase number of attempts for given IP-address and login
+   * (if attempts to login is being counted)
+   *
+   * @param  string
+   * @return  void
+   */
+  private function increase_login_attempt($email)
+  {
+    if ($this->ci->config->item('login_count_attempts', 'tank_auth'))
+    {
+      if (!$this->is_max_login_attempts_exceeded($email))
+      {
+        $this->ci->load->model('tank_auth/login_attempts');
+        $this->ci->login_attempts->increase_attempt($this->ci->input->ip_address(), $email);
+      }
+    }
+  }
+  
+  /**
+   * Clear all attempt records for given IP-address and login
+   * (if attempts to login is being counted)
+   *
+   * @param  string
+   * @return  void
+   */
+  private function clear_login_attempts($email)
+  {
+    if ($this->ci->config->item('login_count_attempts', 'tank_auth'))
+    {
+      $this->ci->load->model('tank_auth/login_attempts');
+      $this->ci->login_attempts->clear_attempts(
+        $this->ci->input->ip_address(),
+        $email,
+        $this->ci->config->item('login_attempt_expire', 'tank_auth')
+      );
+    }
   }
 }

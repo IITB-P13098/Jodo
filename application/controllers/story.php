@@ -13,7 +13,7 @@ class Story extends CI_Controller
     if ($data['is_logged_in'] = $this->tank_auth->is_logged_in())
     {
       $user_id = $this->tank_auth->get_user_id();
-      $data['user_data'] = $this->lib_user_profile->get_user_profile_by_id($user_id);
+      $data['user_data'] = $this->lib_user_profile->get_by_id($user_id);
     }
 
     $this->load->library('lib_story');
@@ -45,7 +45,7 @@ class Story extends CI_Controller
     if ($data['is_logged_in'] = $this->tank_auth->is_logged_in())
     {
       $user_id = $this->tank_auth->get_user_id();
-      $data['user_data'] = $this->lib_user_profile->get_user_profile_by_id($user_id);
+      $data['user_data'] = $this->lib_user_profile->get_by_id($user_id);
     }
     else
     {
@@ -113,7 +113,7 @@ class Story extends CI_Controller
     if ($data['is_logged_in'] = $this->tank_auth->is_logged_in())
     {
       $user_id = $this->tank_auth->get_user_id();
-      $data['user_data'] = $this->lib_user_profile->get_user_profile_by_id($user_id);
+      $data['user_data'] = $this->lib_user_profile->get_by_id($user_id);
     }
     else
     {

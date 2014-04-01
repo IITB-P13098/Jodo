@@ -7,8 +7,32 @@
 | These details are used in emails sent by authentication library.
 |--------------------------------------------------------------------------
 */
-$config['website_name'] = 'Jodo';
-$config['webmaster_email'] = 'no-reply@example.com';
+$config['website_name'] = 'String of Story';
+$config['webmaster_email'] = 'no-reply@stringofstory.com';
+
+/*
+|--------------------------------------------------------------------------
+| Registration settings
+|
+| 'allow_registration' = Registration is enabled or not
+| 'captcha_registration' = Registration uses CAPTCHA
+| 'email_activation' = Requires user to activate their account using email after registration.
+| 'use_username' = Username is required or not.
+|
+| 'username_min_length' = Min length of user's username.
+| 'username_max_length' = Max length of user's username.
+| 'password_min_length' = Min length of user's password.
+| 'password_max_length' = Max length of user's password.
+|--------------------------------------------------------------------------
+*/
+$config['allow_registration'] = TRUE;
+$config['captcha_registration'] = FALSE;
+$config['email_activation'] = TRUE;
+
+$config['password_min_length'] = 5;
+$config['password_max_length'] = 20;
+
+$config['email_max_length']    = 80;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +54,7 @@ $config['phpass_hash_strength'] = 8;
 | 'autologin_cookie_life' = Auto login cookie life before expired. Default is 2 months (60*60*24*31*2).
 |--------------------------------------------------------------------------
 */
-$config['autologin_cookie_name'] = 'autologin';
+$config['autologin_cookie_name'] = 'autologin_sos';
 $config['autologin_cookie_life'] = 60*60*24*31*2;
 
 /* End of file tank_config.php */

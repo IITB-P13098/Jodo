@@ -70,7 +70,7 @@ class Do_story extends CI_Controller
     $this->load->view('modals/title', $data);
   }
 
-  function edit_caption($story_id, $caption = '')
+  function edit_caption($story_id)
   {
     $user_id = $this->tank_auth->get_user_id();
 

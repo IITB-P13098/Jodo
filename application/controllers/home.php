@@ -13,7 +13,7 @@ class Home extends CI_Controller
     if ($data['is_logged_in'] = $this->tank_auth->is_logged_in())
     {
       $user_id = $this->tank_auth->get_user_id();
-      $data['user_data'] = $this->lib_user_profile->get_user_profile_by_id($user_id);
+      $data['user_data'] = $this->lib_user_profile->get_by_id($user_id);
     }
 
     $this->load->config('story', TRUE);
@@ -30,7 +30,7 @@ class Home extends CI_Controller
     $this->load->view('base', $data);
   }
 
-  public function profile($username = '', $page_id = 0)
+  public function profile($req_user_id = '', $page_id = 0)
   {
     $data = array();
 
@@ -41,15 +41,15 @@ class Home extends CI_Controller
     if ($data['is_logged_in'] = $this->tank_auth->is_logged_in())
     {
       $user_id = $this->tank_auth->get_user_id();
-      $data['user_data'] = $this->lib_user_profile->get_user_profile_by_id($user_id);
+      $data['user_data'] = $this->lib_user_profile->get_by_id($user_id);
     }
 
     $this->load->library('lib_user_profile');
-    $data['req_user_data'] = $this->lib_user_profile->get_user_profile_by_username($username);
+    $data['req_user_data'] = $this->lib_user_profile->get_by_id($req_user_id);
 
     if (empty($data['req_user_data']))
     {
-      show_error('invalid username');
+      show_error('invalid user id');
     }
 
     $data['page_title'] = $data['req_user_data']['disp_name'];

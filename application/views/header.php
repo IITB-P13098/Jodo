@@ -20,7 +20,7 @@
           if ($is_logged_in)
           {
             ?>
-            <li><a href="<?php echo base_url('home/profile/'.$user_data['username']); ?>">Me</a></li>
+            <li><a href="<?php echo base_url('home/profile/'.$user_data['user_id']); ?>">Me</a></li>
             <?php
           }
           ?>
@@ -43,7 +43,8 @@
           else
           {
             ?>
-            <li><a href="<?php echo base_url('auth/rime_signin'); ?>">Sign in with Rime</a></li>
+            <li><a href="<?php echo base_url('auth/signin'); ?>">Sign in</a></li>
+            <li><a href="<?php echo base_url('auth/register'); ?>">Register</a></li>
             <?php
           }
           ?>

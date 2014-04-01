@@ -25,9 +25,9 @@ class Lib_user_profile
     return $this->error;
   }
   
-  function get_user_profile_by_id($user_id)
+  function get_by_id($user_id)
   {
-    $profile_data = $this->ci->model_profile->get_user_profile_by_id($user_id);
+    $profile_data = $this->ci->model_profile->get_by_id($user_id);
     if (empty($profile_data))
     {
       $this->error = array('message' => 'invalid user id');
@@ -35,18 +35,5 @@ class Lib_user_profile
     }
     
     return $profile_data;
-  }
-  
-  function get_user_profile_by_username($username)
-  {
-    $profile_data = $this->ci->model_profile->get_user_profile_by_username($username);
-    if (empty($profile_data))
-    {
-      $this->error = array('message' => 'invalid username');
-      return NULL;
-    }
-    
-    $user_id = $profile_data['user_id'];
-    return $this->get_user_profile_by_id($user_id);
   }
 }

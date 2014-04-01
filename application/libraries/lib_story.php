@@ -117,7 +117,7 @@ class Lib_story
     $data['child_count'] = $this->ci->model_story->get_child_count($story_id);
 
     $this->ci->load->library('lib_user_profile');
-    $data['user'] = $this->ci->lib_user_profile->get_user_profile_by_id($story['user_id']);
+    $data['user'] = $this->ci->lib_user_profile->get_by_id($story['user_id']);
 
     return $data;
   }
