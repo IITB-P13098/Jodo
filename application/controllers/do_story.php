@@ -64,7 +64,7 @@ class Do_story extends CI_Controller
       $this->load->library('lib_story');
       $this->lib_story->edit_title($story_id, $user_id, $this->form_validation->set_value('title'));
       
-      redirect('story/index/'.$story_id);
+      redirect('story/id/'.$story_id);
     }
 
     $this->load->view('modals/title', $data);
@@ -94,7 +94,7 @@ class Do_story extends CI_Controller
       $this->load->library('lib_story');
       $this->lib_story->edit_caption($story_id, $user_id, $this->form_validation->set_value('caption'));
       
-      redirect('story/index/'.$story_id);
+      redirect('story/id/'.$story_id);
     }
 
     $this->load->view('modals/caption', $data);

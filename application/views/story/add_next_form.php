@@ -26,7 +26,7 @@ if (!empty($error[$caption['name']])) $caption['id'] = 'inputError';
 <?php echo form_open_multipart($this->uri->uri_string()); ?>
 
 <div class="form-group <?php if (!empty($error[$select_image['name']])) echo 'has-error'; ?>">
-  <?php echo form_label('Select Image (2Mb max)', $select_image['id'], array('class' => 'control-label')); ?>
+  <?php echo form_label('Select Image ('.$this->config->item('max_size', 'upload').'KB max)', $select_image['id'], array('class' => 'control-label')); ?>
   <input type="file" name="<?php echo $select_image['name']; ?>" id="<?php echo $select_image['id']; ?>">
   <?php if (!empty($error[$select_image['name']])) { ?><span class="help-block"><?php echo $error[$select_image['name']]; ?></span><?php } ?>
 </div>

@@ -195,6 +195,15 @@ class Lib_story
     return $data;
   }
 
+  function get_popular($stories_per_page, $page_id = 0)
+  {
+    $this->ci->load->model('model_story_title');
+    $data['story'] = $this->ci->model_story_title->get_popular($stories_per_page, $page_id);
+    $data['count'] = $this->ci->model_story_title->get_count();
+
+    return $data;
+  }
+
   function get_users_recent($user_id, $stories_per_page, $page_id = 0)
   {
     $this->ci->load->model('model_story');

@@ -8,7 +8,7 @@
       if (!empty($story_data['parent_story']))
       {
         ?>
-        <a href="<?php echo base_url('story/index/'.$story_data['parent_story']['story_id']); ?>">
+        <a href="<?php echo base_url('story/id/'.$story_data['parent_story']['story_id']); ?>">
           <div class="thumbnail">
             <div class="thumb rect-responsive" style="background-image: url('<?php echo base_url('uploads/'.$story_data['parent_story']['file_name']); ?>');"></div>
           </div>
@@ -62,7 +62,7 @@
             if (empty($story_data['child_list']) AND $story_data['story']['user_id'] == $user_data['user_id'])
             {
               $redirect = '';
-              if ($story_data['story']['parent_story_id'] != $story_data['story']['start_story_id']) $redirect = 'story/index/'.$story_data['story']['parent_story_id'];
+              if ($story_data['story']['parent_story_id'] != $story_data['story']['start_story_id']) $redirect = 'story/id/'.$story_data['story']['parent_story_id'];
 
               $key_id = 'modal-delete-story-'.$story_data['story']['story_id'];
               $url = base_url('do_story/delete/'.$story_data['story']['story_id'].'?redirect='.rawurlencode($redirect));
@@ -83,7 +83,7 @@
         ?>
         <div class="row">
           <div class="col-xs-8">
-            <a href="<?php echo base_url('story/index/'.$c['story_id']); ?>">
+            <a href="<?php echo base_url('story/id/'.$c['story_id']); ?>">
               <div class="connector"></div>
               <div class="thumbnail">
                 <div class="thumb rect-responsive" style="background-image: url('<?php echo base_url('uploads/'.$c['file_name']); ?>');"></div>
@@ -95,7 +95,7 @@
             foreach ($c['child_list'] as $cc)
             {
               ?>
-              <a href="<?php echo base_url('story/index/'.$cc['story_id']); ?>">
+              <a href="<?php echo base_url('story/id/'.$cc['story_id']); ?>">
                 <div class="connector"></div>
                 <div class="thumbnail">
                   <div class="thumb rect-responsive" style="background-image: url('<?php echo base_url('uploads/'.$cc['file_name']); ?>');"></div>
@@ -116,7 +116,7 @@
         ?>
         <div class="row">
           <div class="col-xs-8">
-            <a class="btn btn-link btn-block" href="<?php echo base_url('story/index/'.$story_data['story']['story_id'].'/'.$next_page); ?>"><span class="glyphicon glyphicon-chevron-down"></span></a>
+            <a class="btn btn-link btn-block" href="<?php echo base_url('story/id/'.$story_data['story']['story_id'].'/'.$next_page); ?>"><span class="glyphicon glyphicon-chevron-down"></span></a>
           </div>
         </div>
         <?php
@@ -131,7 +131,7 @@
           <div class="col-xs-8">
             <div class="connector connector-new"></div>
             <div class="thumbnail">
-              <a href="<?php echo base_url('story/add/'.$story_data['story']['story_id']); ?>">
+              <a href="<?php echo base_url('story/add_next/'.$story_data['story']['story_id']); ?>">
                 <img class="img-responsive" src="http://placehold.it/350&text=Add+String">
               </a>
             </div>
@@ -172,11 +172,11 @@
       ?>
 
       <div class="media">
-        <a class="pull-left" href="<?php echo base_url('home/profile/'.$story_data['user']['username']); ?>">
-          <div class="media-object thumb" style="background-image: url('<?php echo 'http://rimebeta.com/do/file/thumbnail/'.(!empty($story_data['user']['profile_image_id']) ? $story_data['user']['profile_image_id'] : '0').'/s/profile'; ?>'); width:50px; height:50px;"></div>
+        <a class="pull-left" href="<?php echo base_url('user/id/'.$story_data['user']['user_id']); ?>">
+          <div class="media-object thumb" style="background-image: url('<?php echo base_url((!empty($story_data['user']['profile_image_id'])) ? $story_data['user']['profile_image_id'] : 'assets/img/user-profile.png'); ?>'); width:50px; height:50px;"></div>
         </a>
         <div class="media-body">
-          <h4 class="media-heading"><a href="<?php echo base_url('home/profile/'.$story_data['user']['username']); ?>"><?php echo $story_data['user']['disp_name']; ?></a> | <small><?php echo $story_data['user']['username']; ?></small></h4>
+          <h4 class="media-heading"><a href="<?php echo base_url('user/id/'.$story_data['user']['user_id']); ?>"><?php echo $story_data['user']['disp_name']; ?></a></h4>
           <?php echo $story_data['user']['bio']; ?>
         </div>
       </div>
@@ -184,3 +184,8 @@
   </div>
   
 </div>
+
+<!-- resposive thumb !-->
+<script type="text/javascript">
+  $(function() { repos($('.rect-responsive')) });
+</script>

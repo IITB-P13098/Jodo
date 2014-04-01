@@ -15,7 +15,7 @@
     }
     ?>
 
-    <h1><?php echo anchor('story/index/'.$story_data['story']['start_story_id'], $story_data['story']['title']); ?></h1>
+    <h1><?php echo anchor('story/id/'.$story_data['story']['start_story_id'], $story_data['story']['title']); ?></h1>
   </div>
   
   <div class="row">

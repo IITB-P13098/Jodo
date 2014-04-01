@@ -14,13 +14,13 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         
         <ul class="nav navbar-nav">
-          <li><a href="#">Popular</a></li>
-          <li><a href="#">Recent</a></li>
+          <li><a href="<?php echo base_url('home/popular'); ?>">Popular</a></li>
+          <li><a href="<?php echo base_url('home/recent'); ?>">Recent</a></li>
           <?php
           if ($is_logged_in)
           {
             ?>
-            <li><a href="<?php echo base_url('home/profile/'.$user_data['user_id']); ?>">Me</a></li>
+            <li><a href="<?php echo base_url('user/id/'.$user_data['user_id']); ?>">Me</a></li>
             <?php
           }
           ?>

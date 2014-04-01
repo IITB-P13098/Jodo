@@ -40,4 +40,24 @@ class Model_story_title extends CI_Model
     $query = $this->db->get();
     return $query->result_array();
   }
+
+  function get_popular($per_page, $page_id = 0)
+  {
+    $this->db->limit($per_page, $page_id * $per_page);
+
+    $this->db->order_by('story_id', 'ASC');
+
+    $this->db->select($this->story_table.'.*');
+    $this->db->select($this->story_title_table.'.title');
+    $this->db->select($this->images_table.'.file_name');
+    
+    $this->db->from($this->story_table);
+    $this->db->join($this->story_title_table, $this->story_table.'.start_story_id = '.$this->story_title_table.'.story_id');
+    $this->db->join($this->images_table, $this->story_table.'.story_id = '.$this->images_table.'.story_id');
+    
+    $this->db->where('parent_story_id', NULL);
+    
+    $query = $this->db->get();
+    return $query->result_array();
+  }
 }

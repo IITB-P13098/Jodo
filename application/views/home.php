@@ -1,5 +1,12 @@
 <div class="col-xs-12">
   <div class="row">
+    <div class="col-xs-12">
+      <div class="text-center">
+        <?php echo img('assets/img/banner.png'); ?>
+      </div>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-xs-3">
       <?php
       //if ($is_logged_in)

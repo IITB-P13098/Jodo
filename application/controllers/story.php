@@ -2,7 +2,7 @@
 
 class Story extends CI_Controller 
 {
-  public function index($story_id = 0, $page_id = 0)
+  public function id($story_id = 0, $page_id = 0)
   {
     $data = array();
 
@@ -34,7 +34,7 @@ class Story extends CI_Controller
     $this->load->view('base', $data);
   }
 
-  public function add($story_id = 0)
+  public function add_next($story_id = 0)
   {
     $data = array();
 
@@ -49,7 +49,7 @@ class Story extends CI_Controller
     }
     else
     {
-      redirect();
+      redirect('auth/signin');
     }
 
     $this->load->library('lib_story');
@@ -64,6 +64,7 @@ class Story extends CI_Controller
     $this->load->library('security');
 
     $this->load->config('story', TRUE);
+    $this->load->config('upload', TRUE);
     
     $this->load->library('upload');
 
@@ -80,7 +81,7 @@ class Story extends CI_Controller
           $this->load->library('lib_story');
           $story_id = $this->lib_story->add($user_id, $story_data['story']['story_id'], $story_data['story']['start_story_id'], $file_data, $this->form_validation->set_value('caption'));
 
-          redirect('story/index/'.$story_id);
+          redirect('story/id/'.$story_id);
         }
         else
         {
@@ -96,8 +97,8 @@ class Story extends CI_Controller
     $data['story_data'] = $story_data;
     $data['page_title'] = $story_data['story']['title'];
 
-    $data['main_content'] = $this->load->view('story/add_form', $data, TRUE);
-    $data['main_content'] = $this->load->view('story/add', $data, TRUE);
+    $data['main_content'] = $this->load->view('story/add_next_form', $data, TRUE);
+    $data['main_content'] = $this->load->view('story/add_next', $data, TRUE);
     $data['main_content'] = $this->load->view('story/base', $data, TRUE);
     $this->load->view('base', $data);
   }
@@ -117,7 +118,7 @@ class Story extends CI_Controller
     }
     else
     {
-      redirect();
+      redirect('auth/signin');
     }
 
     $this->load->helper(array('form', 'url'));
@@ -125,6 +126,7 @@ class Story extends CI_Controller
     $this->load->library('security');
 
     $this->load->config('story', TRUE);
+    $this->load->config('upload', TRUE);
     
     $this->load->library('upload');
 
@@ -151,7 +153,7 @@ class Story extends CI_Controller
               $this->load->library('lib_story');
               $story_id = $this->lib_story->create($user_id, $this->form_validation->set_value('title'), $file_data_cover, $file_data, $this->form_validation->set_value('cover_caption'), $this->form_validation->set_value('caption'));
 
-              redirect('story/index/'.$story_id);
+              redirect('story/id/'.$story_id);
             }
             else
             {

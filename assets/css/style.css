@@ -43,6 +43,7 @@ a:hover { text-decoration: none; }
 
 .media-heading a { color: #35424A; }
 
+label { font-weight: 400; }
 
 footer .credits { margin-top: 50px; margin-bottom: 30px; }
 

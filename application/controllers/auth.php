@@ -38,12 +38,10 @@ class Auth extends CI_Controller
   
   public function signin()
   {
-    $redirect_url = !empty($_GET['redirect']) ? $_GET['redirect'] : '';
-
     $this->load->library('tank_auth');
     if ($this->tank_auth->is_logged_in()) 
     {
-      redirect($redirect_url);
+      redirect();
     }
     
     $this->load->helper(array('form'));
@@ -67,7 +65,7 @@ class Auth extends CI_Controller
         $this->form_validation->set_value('remember')
         ))
       {
-        redirect($redirect_url);
+        redirect();
       }
       else
       {
@@ -131,7 +129,7 @@ class Auth extends CI_Controller
         $this->load->library('lib_send_email');
         $this->lib_send_email->general('Verify your email', $result['email'], 'verify_email', $result);
         
-        redirect(!empty($_GET['redirect']) ? $_GET['redirect'] : 'promo/start');
+        redirect();
       }
       else
       {
