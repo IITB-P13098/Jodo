@@ -59,9 +59,9 @@ class Lib_send_email
       var_dump($email_to, $subject);
       echo($message); 
       var_dump($alt_message);
-      die();
+      //die();
 
-      //echo $this->ci->email->print_debugger(); die();
+      echo $this->ci->email->print_debugger(); die();
     }
   }
 }
