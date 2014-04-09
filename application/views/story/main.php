@@ -124,7 +124,7 @@
       ?>
 
       <?php
-      if ($is_logged_in AND $story_data['story']['parent_story_id'] != NULL)
+      //if ($is_logged_in AND $story_data['story']['parent_story_id'] != NULL)
       {
         ?>
         <div class="row">

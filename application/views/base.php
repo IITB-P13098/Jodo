@@ -2,7 +2,7 @@
 
 <html lang="en">
   <head>
-    <title><?php if (!empty($page_title)) echo $page_title.' - '; ?>Srting Your Story</title>
+    <title><?php if (!empty($page_title)) echo $page_title.' - '; ?>Sting Your Story</title>
     <meta charset="utf-8">
 
     <!--non-responsive <meta name="viewport" content="width=device-width, initial-scale=1.0"> !-->
