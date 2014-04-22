@@ -62,4 +62,22 @@ class Home extends CI_Controller
     $data['main_content'] = $this->load->view('home', $data, TRUE);
     $this->load->view('base', $data);
   }
+
+  public function how()
+  {
+    $data = array();
+
+    $this->load->library('tank_auth');
+    $this->load->library('lib_user_profile');
+    
+    $user_id = 0;
+    if ($data['is_logged_in'] = $this->tank_auth->is_logged_in())
+    {
+      $user_id = $this->tank_auth->get_user_id();
+      $data['user_data'] = $this->lib_user_profile->get_by_id($user_id);
+    }
+
+    $data['main_content'] = $this->load->view('docs/about', $data, TRUE);
+    $this->load->view('base', $data);
+  }
 }

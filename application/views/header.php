@@ -18,6 +18,7 @@
         <ul class="nav navbar-nav">
           <li><a href="<?php echo base_url('home/popular'); ?>">Popular</a></li>
           <li><a href="<?php echo base_url('home/recent'); ?>">Recent</a></li>
+          <li><a href="<?php echo base_url('home/how'); ?>">How?</a></li>
           <?php
           if ($is_logged_in)
           {
