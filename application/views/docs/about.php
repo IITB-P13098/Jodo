@@ -5,7 +5,7 @@
   <p>SO LET'S TELL OUR STORY!</p>
 
   <h1>HOW TO?</h1>
-  <div class="text-center"><img src="<?php echo base_url('assets/img/about01.png'); ?>"></div>
+  <div class="text-center"><img class="img-responsive" style="display: inline-block;" src="<?php echo base_url('assets/img/about01.png'); ?>"></div>
 
   <p>The steps to add your story are pretty simple :) </p>
   <ul>
@@ -14,7 +14,7 @@
     <li>Once you logged in</li>
   </ul>
 
-  <div class="text-center"><img src="<?php echo base_url('assets/img/about02.png'); ?>"></div>
+  <div class="text-center"><img class="img-responsive" style="display: inline-block;" src="<?php echo base_url('assets/img/about02.png'); ?>"></div>
 
   <p>It's easy to Add your story or add a string to the existing story. Just upload your text matter and supported image. You can also add a string to the existing story after any individual page you decide to continue from.</p>
 </div>
