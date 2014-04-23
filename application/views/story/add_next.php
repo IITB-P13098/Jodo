@@ -4,7 +4,7 @@
     <div class="col-xs-2">
       <a href="<?php echo base_url('story/id/'.$story_data['story']['story_id']); ?>">
         <div class="thumbanil">
-          <div class="thumb rect-responsive" style="background-image: url('<?php echo base_url('uploads/'.$story_data['story']['file_name']); ?>');"></div>
+          <img class="img-responsive" src="<?php echo base_url('timthumb/timthumb.php?src=uploads/'.$story_data['story']['file_name']); ?>&w=150&h=150">
         </div>
       </a>
     </div>

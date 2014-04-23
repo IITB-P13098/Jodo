@@ -10,7 +10,7 @@
         ?>
         <a href="<?php echo base_url('story/id/'.$story_data['parent_story']['story_id']); ?>">
           <div class="thumbnail">
-            <div class="thumb rect-responsive" style="background-image: url('<?php echo base_url('uploads/'.$story_data['parent_story']['file_name']); ?>');"></div>
+            <img class="img-responsive" src="<?php echo base_url('timthumb/timthumb.php?src=uploads/'.$story_data['parent_story']['file_name']); ?>&w=250&h=250">
           </div>
         </a>
         <?php
@@ -28,7 +28,7 @@
       ?>
       <div class="thumbnail">
         <a data-toggle="modal" data-target="#myModal" href="#">
-          <img class="img-responsive" src="<?php echo base_url('uploads/'.$story_data['story']['file_name']); ?>">
+          <img class="img-responsive" src="<?php echo base_url('timthumb/timthumb.php?src=uploads/'.$story_data['story']['file_name']); ?>&w=750">
         </a>
       </div>
 
@@ -43,7 +43,7 @@
               </div>
               <div class="modal-body">
                 <div class="photo-holder">
-                  <img class="img-responsive" src="<?php echo base_url('uploads/'.$story_data['story']['file_name']); ?>">
+                  <img class="img-responsive" src="<?php echo base_url('timthumb/timthumb.php?src=uploads/'.$story_data['story']['file_name']); ?>&w=750">
                 </div>
               </div>
               <div class="modal-footer">
@@ -86,7 +86,7 @@
             <a href="<?php echo base_url('story/id/'.$c['story_id']); ?>">
               <div class="connector"></div>
               <div class="thumbnail">
-                <div class="thumb rect-responsive" style="background-image: url('<?php echo base_url('uploads/'.$c['file_name']); ?>');"></div>
+                <img class="img-responsive" src="<?php echo base_url('timthumb/timthumb.php?src=uploads/'.$c['file_name']); ?>&w=250&h=250">
               </div>
             </a>
           </div>
@@ -98,7 +98,7 @@
               <a href="<?php echo base_url('story/id/'.$cc['story_id']); ?>">
                 <div class="connector"></div>
                 <div class="thumbnail">
-                  <div class="thumb rect-responsive" style="background-image: url('<?php echo base_url('uploads/'.$cc['file_name']); ?>');"></div>
+                  <img class="img-responsive" src="<?php echo base_url('timthumb/timthumb.php?src=uploads/'.$cc['file_name']); ?>&w=250&h=250">
                 </div>
               </a>
               <?php
@@ -173,7 +173,7 @@
 
       <div class="media">
         <a class="pull-left" href="<?php echo base_url('user/id/'.$story_data['user']['user_id']); ?>">
-          <div class="media-object thumb" style="background-image: url('<?php echo base_url((!empty($story_data['user']['profile_image_id'])) ? $story_data['user']['profile_image_id'] : 'assets/img/user-profile.png'); ?>'); width:50px; height:50px;"></div>
+          <img class="media-object img-responsive" src="<?php echo base_url((!empty($story_data['user']['profile_image_id'])) ? $story_data['user']['profile_image_id'] : 'assets/img/user-profile.png'); ?>" style="width:50px; height:50px;">
         </a>
         <div class="media-body">
           <h4 class="media-heading"><a href="<?php echo base_url('user/id/'.$story_data['user']['user_id']); ?>"><?php echo $story_data['user']['disp_name']; ?></a></h4>
