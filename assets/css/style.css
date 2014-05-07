@@ -30,7 +30,7 @@ a:hover { text-decoration: none; }
 
 .text-wrap { word-wrap: break-word; }
 
-.thumbnail { padding: 0; border-radius: 0; border: 0;}
+.thumbnail { border: 0;}
 
 .media-heading a { color: #35424A; }
 
@@ -40,8 +40,17 @@ footer .credits { margin-top: 30px; margin-bottom: 30px; }
 
 .user-head { margin-bottom: 20px; }
 
+.thumbnail-cover {
+  display: block;
+  background-color: #F0EAED;
+  /*width: 200px;
+  height: 200px;*/
+  background-position: center center;
+  background-size: cover;
+}
+
 .story-list .thumbnail { margin-bottom: 30px; }
-.story-list .caption { text-overflow: ellipsis; white-space: nowrap; overflow: hidden; padding: 0; }
+.story-list .caption { text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
 .story-title { text-transform: uppercase; }
 .story-title a { color: #35424A; }
 .story-title a:hover { color: #35424A; }
