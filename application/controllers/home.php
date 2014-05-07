@@ -4,7 +4,7 @@ class Home extends CI_Controller
 {
   public function index()
   {
-    $this->recent();
+    $this->popular();
   }
 
   public function recent($page_id = 0)
@@ -63,7 +63,7 @@ class Home extends CI_Controller
     $this->load->view('base', $data);
   }
 
-  public function how()
+  public function about()
   {
     $data = array();
 

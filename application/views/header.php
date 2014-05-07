@@ -16,9 +16,8 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         
         <ul class="nav navbar-nav">
-          <li><a href="<?php echo base_url('home/popular'); ?>">Popular</a></li>
           <li><a href="<?php echo base_url('home/recent'); ?>">Recent</a></li>
-          <li><a href="<?php echo base_url('home/how'); ?>">How?</a></li>
+          <li><a href="<?php echo base_url('home/about'); ?>">About</a></li>
           <?php
           if ($is_logged_in)
           {
@@ -33,7 +32,7 @@
           <div class="form-group">
             <input type="text" class="form-control" placeholder="Search">
           </div>
-          <button type="submit" class="btn btn-default sr-only">Submit</button>
+          <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
         </form>
         <ul class="nav navbar-nav navbar-right">
           <?php
