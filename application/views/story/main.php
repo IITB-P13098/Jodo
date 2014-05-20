@@ -49,17 +49,17 @@
         </div>
         
         <div class="caption">
-          <?php
-          if (!empty($story_data['story']['caption']))
-          {
-            ?>
-            <blockquote>
-              <p><?php echo $story_data['story']['caption']; ?></p>
-              <footer>by <cite title="Source Title"><a href="<?php echo base_url('user/id/'.$story_data['user']['user_id']); ?>"><?php echo $story_data['user']['disp_name']; ?></a></cite></footer>
-            </blockquote>
+          <blockquote>
             <?php
-          }
-          ?>
+            if (!empty($story_data['story']['caption']))
+            {
+              ?>
+                <p><?php echo $story_data['story']['caption']; ?></p>
+              <?php
+            }
+            ?>
+            <footer>by <cite title="Source Title"><a href="<?php echo base_url('user/id/'.$story_data['user']['user_id']); ?>"><?php echo $story_data['user']['disp_name']; ?></a></cite></footer>
+          </blockquote>
 
           <p>
             <?php
@@ -68,7 +68,7 @@
               if (empty($story_data['child_list']) AND $story_data['story']['user_id'] == $user_data['user_id'])
               {
                 $redirect = '';
-                if ($story_data['story']['parent_story_id'] != $story_data['story']['start_story_id']) $redirect = 'story/id/'.$story_data['story']['parent_story_id'];
+                if (!empty($story_data['story']['parent_story_id'])) $redirect = 'story/id/'.$story_data['story']['parent_story_id'];
 
                 $key_id = 'modal-delete-story-'.$story_data['story']['story_id'];
                 $url = base_url('do_story/delete/'.$story_data['story']['story_id'].'?redirect='.rawurlencode($redirect));

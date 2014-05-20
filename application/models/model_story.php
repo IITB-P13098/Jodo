@@ -82,7 +82,7 @@ class Model_story extends CI_Model
     $this->db->delete($this->story_table);
   }
   
-  public function get_child_list($story_id, $per_page, $page_id = 0)
+  public function get_child_list($story_id, $per_page = 5, $page_id = 0)
   {
     $this->db->limit($per_page, $page_id * $per_page);
 

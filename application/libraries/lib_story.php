@@ -132,16 +132,15 @@ class Lib_story
     }
 
     $story = $this->ci->model_story->get_story_data_by_id($story_id);
-    if ($story['parent_story_id'] == $story['start_story_id'])
+    $this->ci->model_story->purge_by_id($story_id, $user_id);
+
+    $image_path = './uploads/'.$story['file_name'];
+    if (file_exists($image_path))
     {
-      $this->ci->model_story->purge_by_id($story['start_story_id'], $user_id);
-      return TRUE;
+      unlink($image_path);
     }
-    else
-    {
-      $this->ci->model_story->purge_by_id($story_id, $user_id);
-      return TRUE;
-    }
+
+    return TRUE;
   }
 
   function edit_title($story_id, $user_id, $title)
