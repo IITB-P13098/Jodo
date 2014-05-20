@@ -46,6 +46,9 @@ footer .credits { padding-top: 20px; padding-bottom: 20px; }
 .story-title a { color: #35424A; }
 /* .story-main { margin-bottom: 20px; } */
 
+
+.story-thumbnail .selected { border: 4px solid #428bca; }
+
 /*.story-main blockquote p { white-space: nowrap; }*/
 
 /*.image-zoom .modal-dialog { width: 90%; }*/

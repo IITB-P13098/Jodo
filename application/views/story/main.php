@@ -2,14 +2,14 @@
 
 <div class="col-xs-12">
 
-  <div class="story-main row">
+  <div class="story-main row" id="story-nav">
     <div class="col-xs-2">
       <?php
       if (!empty($story_data['parent_story']))
       {
         ?>
         <a href="<?php echo base_url('story/id/'.$story_data['parent_story']['story_id']); ?>">
-          <div class="thumbnail">
+          <div class="thumbnail story-thumbnail" id="story-thumbnail-left" data-story-id="<?php echo $story_data['parent_story']['story_id']; ?>">
             <div class="bg-cover" style="background-image: url(<?php echo base_url('uploads/'.$story_data['parent_story']['file_name']); ?>)">
               <img class="img-responsive" src="<?php echo base_url('assets/img/blank.png'); ?>" style="width:150px;">
             </div>
@@ -86,6 +86,7 @@
 
     <div class="col-xs-3">
       <?php
+      $right_story_thumbnail = FALSE;
       foreach ($story_data['child_list'] as $c)
       {
         ?>
@@ -93,7 +94,7 @@
           <div class="col-xs-8">
             <a href="<?php echo base_url('story/id/'.$c['story_id']); ?>">
               <div class="connector"></div>
-              <div class="thumbnail">
+              <div class="thumbnail story-thumbnail" id="<?php if (!$right_story_thumbnail) echo "story-thumbnail-right"; ?>" data-story-id="<?php echo $c['story_id']; ?>">
                 <div class="bg-cover" style="background-image: url(<?php echo base_url('uploads/'.$c['file_name']); ?>)">
                   <img class="img-responsive" src="<?php echo base_url('assets/img/blank.png'); ?>" style="width:150px;">
                 </div>
@@ -105,20 +106,21 @@
             foreach ($c['child_list'] as $cc)
             {
               ?>
-              <a href="<?php echo base_url('story/id/'.$cc['story_id']); ?>">
+              <!-- <a href="<?php echo base_url('story/id/'.$cc['story_id']); ?>"> -->
                 <div class="connector"></div>
                 <div class="thumbnail">
                   <div class="bg-cover" style="background-image: url(<?php echo base_url('uploads/'.$cc['file_name']); ?>)">
                     <img class="img-responsive" src="<?php echo base_url('assets/img/blank.png'); ?>" style="width:150px;">
                   </div>
                 </div>
-              </a>
+              <!-- </a> -->
               <?php
             }
             ?>
           </div>
         </div>
         <?php
+        $right_story_thumbnail = TRUE;
       }
       ?>
 
@@ -155,3 +157,54 @@
     </div>
   </div>
 </div>
+
+<script>
+  $("#story-thumbnail-right img").addClass("selected");
+
+  $(document).keydown(function(e) {
+    if (e.keyCode == 13) { // enter
+      
+    }
+    if (e.keyCode == 37) { // left
+      if ($("#story-thumbnail-left img").hasClass("selected"))
+      {
+        selectOption($("#story-thumbnail-left").data("storyId"))
+      }
+      else
+      {
+        $(".story-thumbnail img").removeClass("selected");
+        $("#story-thumbnail-left img").addClass("selected");
+      }
+    }
+    if (e.keyCode == 38) { // up
+    }
+    if (e.keyCode == 39) { // right
+      if ($("#story-thumbnail-right img").hasClass("selected"))
+      {
+        selectOption($("#story-thumbnail-right").data("storyId"))
+      }
+      else
+      {
+        $(".story-thumbnail img").removeClass("selected");
+        $("#story-thumbnail-right img").addClass("selected");
+      }
+    }
+    if (e.keyCode == 40) { // up
+    }
+  });
+
+  $(".story-thumbnail img").mouseover(function() {
+    $(".story-thumbnail img").removeClass("selected");
+    $(this).addClass("selected");
+  }).click(function() {
+    // selectOption();
+  });
+
+  function selectOption(id) {
+    // go to story
+    if (id)
+    {
+      window.location = "<?php echo base_url('story/id') ?>"+"/"+id
+    }
+  }
+</script>

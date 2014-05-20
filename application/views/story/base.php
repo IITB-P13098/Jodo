@@ -1,5 +1,5 @@
 <div class="col-xs-12">
-  <div class="story-title">
+  <div class="">
     <?php
     if (!empty($user_data))
     {
@@ -8,14 +8,14 @@
         $key_id = 'modal-edit-title-'.$story_data['story']['story_id'];
         $url = base_url('do_story/edit_title/'.$story_data['story']['story_id'].'/'.rawurlencode($story_data['story']['title']));
         ?>
-        <a class="pull-right" data-toggle="modal" data-target="#<?php echo $key_id; ?>" href="<?php echo $url; ?>"><span class="glyphicon glyphicon-edit"></span></a>
+        <a class="pull-right" data-toggle="modal" data-target="#<?php echo $key_id; ?>" href="<?php echo $url; ?>"><span class="glyphicon glyphicon-pencil"></span></a>
         <div class="modal fade" id="<?php echo $key_id; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
         <?php
       }
     }
     ?>
 
-    <h1><?php echo anchor('story/id/'.$story_data['story']['start_story_id'], $story_data['story']['title']); ?></h1>
+    <h1 class="story-title"><?php echo anchor('story/id/'.$story_data['story']['start_story_id'], $story_data['story']['title']); ?></h1>
   </div>
   
   <div class="row">
