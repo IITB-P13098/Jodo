@@ -9,10 +9,10 @@
       ?>
       <div class="col-xs-3">
         <div class="thumbnail">
-          <div class="thumbnail-cover" style="background-image: url('<?php echo base_url('timthumb/timthumb.php?src=uploads/'.$s['file_name']); ?>&w=250&h=250')">
-          <a href="<?php echo base_url('story/id/'.$s['story_id']); ?>" title="<?php echo $s['title']; ?>">
-            <img class="img-responsive" src="<?php echo base_url('assets/img/story-cover.png'); ?>">
-          </a>
+          <div class="bg-cover" style="background-image: url('<?php echo base_url('uploads/'.$s['file_name']); ?>')">
+            <a href="<?php echo base_url('story/id/'.$s['story_id']); ?>" title="<?php echo $s['title']; ?>">
+              <img class="img-responsive" src="<?php echo base_url('assets/img/story-cover.png'); ?>">
+            </a>
           </div>
           <div class="caption">
             <?php echo anchor('story/id/'.$s['story_id'], $s['title']); ?>

@@ -1,4 +1,4 @@
-<footer>
+<footer class="main-footer">
   <div class="container">
     <div class="row">
       
@@ -13,33 +13,6 @@
     </div>
   </div>
 </footer>
-
-<!-- resposive thumb !-->
-<script type="text/javascript">
-  function repos(imgs) {
-      imgs.each(function (i, o) {
-          //alert("parent width="+$(o).parent().width());
-
-          var size = $(o).parent().width();
-
-          var a = 1;
-          if ($(o).attr('data-aspectratio')) a = $(o).attr('data-aspectratio');
-
-          $(o).css('width', size);
-          $(o).css('height', size / a);
-      })
-  }
-
-  $(window).resize(function () {
-      repos($('.rect-responsive'))
-  })
-
-  $(function() {
-    repos($('.rect-responsive'))
-  });
-
-  //repos($('.rect-responsive'))
-</script>
 
 <!-- add google analytics !-->
 <script>

@@ -4,7 +4,7 @@
       
       <div class="user-head media">
         <a class="pull-left" href="<?php echo base_url('user/id/'.$req_user_data['user_id']); ?>">
-          <div class="media-object thumb" style="background-image: url('<?php echo 'http://rimebeta.com/do/file/thumbnail/'.(!empty($req_user_data['profile_image_id']) ? $req_user_data['profile_image_id'] : '0').'/s/profile'; ?>'); width:50px; height:50px;"></div>
+          <img class="media-object img-responsive" src="<?php echo base_url((!empty($req_user_data['profile_image_id'])) ? $req_user_data['profile_image_id'] : 'assets/img/user-profile.png'); ?>" style="width:32px; height:32px;">
         </a>
         <div class="media-body">
           <h4 class="media-heading"><a href="<?php echo base_url('user/id/'.$req_user_data['user_id']); ?>"><?php echo $req_user_data['disp_name']; ?></a></h4>

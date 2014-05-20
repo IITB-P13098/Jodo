@@ -87,7 +87,7 @@ class Do_story extends CI_Controller
     $this->load->library('security');
 
     $this->load->config('story', TRUE);
-    $this->form_validation->set_rules('caption', 'Caption', 'trim|required|xss_clean|max_length['.$this->config->item('caption_max_length', 'story').']');
+    $this->form_validation->set_rules('caption', 'Caption', 'trim|xss_clean|max_length['.$this->config->item('caption_max_length', 'story').']');
 
     if ($this->form_validation->run())
     {
