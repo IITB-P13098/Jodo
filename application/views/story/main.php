@@ -146,7 +146,7 @@
             <div class="connector connector-new"></div>
             <div class="thumbnail">
               <a href="<?php echo base_url('story/add_next/'.$story_data['story']['story_id']); ?>">
-                <img class="img-responsive" src="http://placehold.it/350&text=Add+String">
+                <img class="img-responsive" src="<?php echo base_url('assets/img/add_next.png'); ?>">
               </a>
             </div>
           </div>
