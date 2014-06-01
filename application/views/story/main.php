@@ -29,7 +29,9 @@
       }
       ?>
       <div class="thumbnail">
-        <img class="img-responsive" src="<?php echo base_url('uploads/'.$story_data['story']['file_name']); ?>" style="width:1750px;">
+        <a data-toggle="modal" data-target="#myModal" href="#">
+          <img class="img-responsive" src="<?php echo base_url('uploads/'.$story_data['story']['file_name']); ?>" style="width:1750px;">
+        </a>
 
         <div class="media">
           <?php
@@ -81,6 +83,28 @@
             ?>
           </p>
         </div>
+
+        <div class="image-zoom">
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title" id="myModalLabel"><?php echo $story_data['story']['title']; ?></h4>
+                </div>
+                <div class="modal-body">
+                  <div class="photo-holder">
+                    <img class="img-responsive" src="<?php echo base_url('uploads/'.$story_data['story']['file_name']); ?>">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <p class="text-left"><?php echo $story_data['story']['caption']; ?></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
