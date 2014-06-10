@@ -3,7 +3,7 @@
 <div class="col-xs-12">
 
   <div class="story-main row" id="story-nav">
-    <div class="col-xs-2">
+    <div class="col-xs-4 col-sm-2">
       <?php
       if (!empty($story_data['parent_story']))
       {
@@ -11,7 +11,7 @@
         <a href="<?php echo base_url('story/id/'.$story_data['parent_story']['story_id']); ?>">
           <div class="thumbnail story-thumbnail" id="story-thumbnail-left" data-story-id="<?php echo $story_data['parent_story']['story_id']; ?>">
             <div class="bg-cover" style="background-image: url(<?php echo base_url('uploads/'.$story_data['parent_story']['file_name']); ?>)">
-              <img class="img-responsive" src="<?php echo base_url('assets/img/blank.png'); ?>" style="width:150px;">
+              <img class="img-responsive" src="<?php echo base_url('assets/img/blank.png'); ?>" width="300">
             </div>
           </div>
         </a>
@@ -19,7 +19,7 @@
       }
       ?>
     </div>
-    <div class="col-xs-7">
+    <div class="col-xs-12 col-sm-7">
       <?php
       if (!empty($story_data['parent_story']))
       {
@@ -108,7 +108,7 @@
       </div>
     </div>
 
-    <div class="col-xs-3">
+    <div class="col-xs-6 col-sm-3">
       <?php
       $right_story_thumbnail = FALSE;
       foreach ($story_data['child_list'] as $c)
@@ -120,7 +120,7 @@
               <div class="connector"></div>
               <div class="thumbnail story-thumbnail" id="<?php if (!$right_story_thumbnail) echo "story-thumbnail-right"; ?>" data-story-id="<?php echo $c['story_id']; ?>">
                 <div class="bg-cover" style="background-image: url(<?php echo base_url('uploads/'.$c['file_name']); ?>)">
-                  <img class="img-responsive" src="<?php echo base_url('assets/img/blank.png'); ?>" style="width:150px;">
+                  <img class="img-responsive" src="<?php echo base_url('assets/img/blank.png'); ?>" width="300">
                 </div>
               </div>
             </a>
@@ -134,7 +134,7 @@
                 <div class="connector"></div>
                 <div class="thumbnail">
                   <div class="bg-cover" style="background-image: url(<?php echo base_url('uploads/'.$cc['file_name']); ?>)">
-                    <img class="img-responsive" src="<?php echo base_url('assets/img/blank.png'); ?>" style="width:150px;">
+                    <img class="img-responsive" src="<?php echo base_url('assets/img/blank.png'); ?>" width="300">
                   </div>
                 </div>
               <!-- </a> -->

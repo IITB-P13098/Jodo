@@ -1,4 +1,4 @@
-<div class="col-xs-6 col-xs-offset-3">
+<div class="col-xs-12 col-md-offset-4 col-md-4">
     
     <!--<a href="<?php echo base_url(); ?>"><img src="<?php echo base_url('/assets/img/logo-square.png'); ?>"></a>!-->
 

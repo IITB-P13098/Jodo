@@ -7,7 +7,7 @@
     foreach ($story as $s)
     {
       ?>
-      <div class="col-xs-3">
+      <div class="col-xs-6 col-md-4 col-md-3">
         <div class="thumbnail">
           <div class="bg-cover" style="background-image: url('<?php echo base_url('uploads/'.$s['file_name']); ?>')">
             <a href="<?php echo base_url('story/id/'.$s['story_id']); ?>" title="<?php echo $s['title']; ?>">
@@ -29,7 +29,7 @@
   {
     ?>
     <div class="row">
-      <div class="col-xs-4 col-xs-offset-4">
+      <div class="col-xs-12 col-md-4 col-md-offset-4">
         <a class="btn btn-primary btn-block" href="<?php echo base_url($next_page); ?>">More</a>
       </div>
     </div>
