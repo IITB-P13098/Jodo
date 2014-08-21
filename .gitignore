@@ -1,2 +1,16 @@
+.DS_Store
+
+application/cache/*
+!application/cache/index.html
+!application/cache/.htaccess
+
+application/logs/*
+!application/logs/index.html
+!application/logs/.htaccess
+
+*/logs/log-*.php
+*/logs/!index.html
+
 uploads/*
-timthumb/cache/*
+!uploads/index.html
+!uploads/.htaccess
